@@ -1,0 +1,2 @@
+
+INSERT INTO USUARIOS (id, name) VALUES (1, 'USA');
