@@ -1,6 +1,7 @@
 package com.challenge.uala.model;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -23,12 +24,16 @@ public class Usuarios {
     @NotNull
     private String name;
     @NotNull
+    @Column(name = "LASTNAME")
     private String lastName;
     @NotNull
+    @Column(name = "BIRTHDATE")
     private LocalDate birthDate;
     @NotNull
+    @Column(name = "EMAIL")
     private String email;
     @NotNull
+    @Column(name = "PHONE")
     private String phone;
 
 
