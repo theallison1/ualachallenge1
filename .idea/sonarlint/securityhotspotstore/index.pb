@@ -13,3 +13,7 @@ u
 Esrc/main/java/com/challenge/uala/serviceUsuarios/UsuariosService.java,7/2/72f7f214c8f3d12a9b47df367300ba96a348bbc5
 x
 Hsrc/main/java/com/challenge/uala/serviceUsuarios/UsuarioServiceImpl.java,3/c/3ceaed986ed653abceded936ef2c4e1829e22e52
+j
+:src/test/java/com/challenge/uala/UalaApplicationTests.java,9/8/98925b96649864f619fc9816adcd3351b883355d
+x
+Hsrc/test/java/com/challenge/uala/usuarioTEst/UsuarioServiceImplTest.java,9/e/9e8835c5e4d9c4dc46ecb78cdeb6233d9328c570
