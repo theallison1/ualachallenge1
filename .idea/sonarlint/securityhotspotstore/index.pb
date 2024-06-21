@@ -5,3 +5,11 @@ d
 uala.iml,e/c/ec2442e33b04418bf0a5c98472ac6a34d2015c9d
 7
 pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
+{
+Ksrc/main/java/com/challenge/uala/controllerUsuarios/ControllerUsuarios.java,4/6/461e15786c5f9188d38a003f9c904f6afc0c7194
+n
+>src/main/java/com/challenge/uala/repoUsuarios/UsuarioRepo.java,2/0/20753092267d51b8a83d40f85c03f5b6f051e23b
+u
+Esrc/main/java/com/challenge/uala/serviceUsuarios/UsuariosService.java,7/2/72f7f214c8f3d12a9b47df367300ba96a348bbc5
+x
+Hsrc/main/java/com/challenge/uala/serviceUsuarios/UsuarioServiceImpl.java,3/c/3ceaed986ed653abceded936ef2c4e1829e22e52
