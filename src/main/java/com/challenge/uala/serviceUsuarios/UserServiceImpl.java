@@ -11,16 +11,21 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository usuarioRepository;
+    private final UserRepository userRepository;
 
     public UserServiceImpl(UserRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
+        this.userRepository = usuarioRepository;
     }
 
-
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
     @Override
     public User findByUsername(String username) {
         return null;
+    }
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
 
 }

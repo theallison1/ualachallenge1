@@ -1,22 +1,12 @@
 
-d
-4src/main/java/com/challenge/uala/model/Usuarios.java,6/2/62259bc642f9363908314af292dfa422ad13f32c
 8
 uala.iml,e/c/ec2442e33b04418bf0a5c98472ac6a34d2015c9d
 7
 pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
 {
 Ksrc/main/java/com/challenge/uala/controllerUsuarios/ControllerUsuarios.java,4/6/461e15786c5f9188d38a003f9c904f6afc0c7194
-n
->src/main/java/com/challenge/uala/repoUsuarios/UsuarioRepo.java,2/0/20753092267d51b8a83d40f85c03f5b6f051e23b
-u
-Esrc/main/java/com/challenge/uala/serviceUsuarios/UsuariosService.java,7/2/72f7f214c8f3d12a9b47df367300ba96a348bbc5
-x
-Hsrc/main/java/com/challenge/uala/serviceUsuarios/UsuarioServiceImpl.java,3/c/3ceaed986ed653abceded936ef2c4e1829e22e52
 j
 :src/test/java/com/challenge/uala/UalaApplicationTests.java,9/8/98925b96649864f619fc9816adcd3351b883355d
-x
-Hsrc/test/java/com/challenge/uala/usuarioTEst/UsuarioServiceImplTest.java,9/e/9e8835c5e4d9c4dc46ecb78cdeb6233d9328c570
 s
 Csrc/main/java/com/challenge/uala/model/DtoUsuarios/DtoUsuarios.java,8/a/8ab831b5cc8d71f26fa852d98332534f2f1fab99
 a
@@ -38,4 +28,8 @@ Esrc/main/java/com/challenge/uala/serviceUsuarios/UserServiceImpl.java,9/5/9583
 x
 Hsrc/main/java/com/challenge/uala/controllerUsuarios/TweetController.java,6/f/6f1bfcb90fc182d394ba3622f571e9190766cd34
 u
-Esrc/test/java/com/challenge/uala/usuarioTEst/UserServiceImplTest.java,7/e/7ebf95a6f423a1ff061dd396cd30c58fceec4b7a
+Esrc/test/java/com/challenge/uala/UserServiceTest/UserServiceTest.java,0/f/0f3a2bb084786de24e93b71cdd1b43c7616691b9
+w
+Gsrc/test/java/com/challenge/uala/TweetServiceTest/TweetServiceTest.java,5/b/5b5b7c9bd74c9615fe7fc4354f24a510dc669311
+}
+Msrc/test/java/com/challenge/uala/TweetControllerTest/TweetControllerTest.java,c/1/c18143a73de9f592c8a2fb3749951821e133367c
