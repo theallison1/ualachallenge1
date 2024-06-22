@@ -1,15 +1,18 @@
 package com.challenge.uala.usuarioTEst;
 
 
+import com.challenge.uala.model.DtoUsuarios.DtoUsuarios;
 import com.challenge.uala.model.Usuarios;
 import com.challenge.uala.repoUsuarios.UsuarioRepo;
 import com.challenge.uala.serviceUsuarios.UsuarioServiceImpl;
 import com.challenge.uala.serviceUsuarios.UsuariosService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -18,7 +21,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
+@ExtendWith(MockitoExtension.class)
 class UsuarioServiceImplTest {
 
     @Mock
@@ -65,9 +68,14 @@ class UsuarioServiceImplTest {
 
     @Test
     void testCreateUsuario() {
-        when(usuarioRepository.save(usuario)).thenReturn(usuario);
+        DtoUsuarios dtoUsuarios = new DtoUsuarios();
+        dtoUsuarios.setLastName("espi");
+        dtoUsuarios.setEmail("jajaja");
+        dtoUsuarios.setBirthDate(LocalDate.now());
+        dtoUsuarios.setName("nicoo");
+        dtoUsuarios.setPhone("45455454");
 
-        Usuarios result = usuarioService.createUsuario(usuario);
+        Usuarios result = usuarioService.createUsuario(dtoUsuarios);
         assertEquals(usuario, result);
         verify(usuarioRepository, times(1)).save(usuario);
     }

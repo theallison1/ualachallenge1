@@ -17,3 +17,13 @@ j
 :src/test/java/com/challenge/uala/UalaApplicationTests.java,9/8/98925b96649864f619fc9816adcd3351b883355d
 x
 Hsrc/test/java/com/challenge/uala/usuarioTEst/UsuarioServiceImplTest.java,9/e/9e8835c5e4d9c4dc46ecb78cdeb6233d9328c570
+s
+Csrc/main/java/com/challenge/uala/model/DtoUsuarios/DtoUsuarios.java,8/a/8ab831b5cc8d71f26fa852d98332534f2f1fab99
+a
+1src/main/java/com/challenge/uala/model/Tweet.java,1/5/15a706068003fa072b962ffbb02a6cca5ab24606
+r
+Bsrc/main/java/com/challenge/uala/repoUsuarios/TweetRepository.java,4/8/4872d74d50655b297a87709fbfc98d418437bd47
+r
+Bsrc/main/java/com/challenge/uala/serviceUsuarios/TweetService.java,b/4/b46c5a967a7fc21a83e9268d03531b1fdd4fcb79
+v
+Fsrc/main/java/com/challenge/uala/serviceUsuarios/TweetServiceImpl.java,b/4/b4d4bb8bc7467c0711a43622c461b046c7a52991

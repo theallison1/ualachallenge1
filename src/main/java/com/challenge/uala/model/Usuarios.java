@@ -1,14 +1,13 @@
 package com.challenge.uala.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Data
@@ -35,6 +34,20 @@ public class Usuarios {
     @NotNull
     @Column(name = "PHONE")
     private String phone;
+
+    @OneToMany(mappedBy = "usario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Tweet> tweets = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_followers",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "follower_id")
+    )
+    private Set<Usuarios> followers = new HashSet<>();
+
+    @ManyToMany(mappedBy = "followers")
+    private Set<Usuarios> following = new HashSet<>();
 
 
 

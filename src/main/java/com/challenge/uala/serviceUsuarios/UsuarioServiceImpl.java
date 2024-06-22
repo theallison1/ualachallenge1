@@ -1,5 +1,6 @@
 package com.challenge.uala.serviceUsuarios;
 
+import com.challenge.uala.model.DtoUsuarios.DtoUsuarios;
 import com.challenge.uala.model.Usuarios;
 import com.challenge.uala.repoUsuarios.UsuarioRepo;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class UsuarioServiceImpl implements UsuariosService{
     }
 
     @Override
-    public Usuarios createUsuario(Usuarios usuario) {
+    public Usuarios createUsuario(DtoUsuarios usuario) {
         return usuarioRepository.save(
                 Usuarios.builder()
                         .name(usuario.getName())
@@ -65,4 +66,17 @@ public class UsuarioServiceImpl implements UsuariosService{
             return false;
         }
     }
+
+    @Override
+    public void followUser(Usuarios user, Usuarios userToFollow) {
+        user.getFollowing().add(userToFollow);
+        usuarioRepository.save(user);
+    }
+
+    @Override
+    public List<Usuarios> getFollowing(Usuarios user) {
+        return List.copyOf(user.getFollowing());
+    }
+
+
 }
