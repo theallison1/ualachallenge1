@@ -27,3 +27,15 @@ r
 Bsrc/main/java/com/challenge/uala/serviceUsuarios/TweetService.java,b/4/b46c5a967a7fc21a83e9268d03531b1fdd4fcb79
 v
 Fsrc/main/java/com/challenge/uala/serviceUsuarios/TweetServiceImpl.java,b/4/b4d4bb8bc7467c0711a43622c461b046c7a52991
+`
+0src/main/java/com/challenge/uala/model/User.java,9/b/9bfc6c8e63810966f78afd6abbfe3907e2533ad0
+q
+Asrc/main/java/com/challenge/uala/repoUsuarios/UserRepository.java,4/e/4e651f228cdfc26d957f36e162caa7f5dfb8ed24
+q
+Asrc/main/java/com/challenge/uala/serviceUsuarios/UserService.java,9/1/91aa900963b8e12359503a688db38bfb1d17bae3
+u
+Esrc/main/java/com/challenge/uala/serviceUsuarios/UserServiceImpl.java,9/5/9583d953748ce7b256249f9508b201c49dcad78a
+x
+Hsrc/main/java/com/challenge/uala/controllerUsuarios/TweetController.java,6/f/6f1bfcb90fc182d394ba3622f571e9190766cd34
+u
+Esrc/test/java/com/challenge/uala/usuarioTEst/UserServiceImplTest.java,7/e/7ebf95a6f423a1ff061dd396cd30c58fceec4b7a

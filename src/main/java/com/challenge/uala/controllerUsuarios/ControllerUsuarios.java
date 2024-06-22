@@ -1,8 +1,8 @@
 package com.challenge.uala.controllerUsuarios;
 
 import com.challenge.uala.model.DtoUsuarios.DtoUsuarios;
-import com.challenge.uala.model.Usuarios;
-import com.challenge.uala.serviceUsuarios.UsuariosService;
+import com.challenge.uala.model.User;
+import com.challenge.uala.serviceUsuarios.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.ResponseEntity;
@@ -16,51 +16,51 @@ import java.util.Optional;
 public class ControllerUsuarios {
 
 
-    private final UsuariosService usuariosService;
-    private static final Logger LOGGER = LogManager.getLogger(UsuariosService.class);
+    private final UserService userService;
+    private static final Logger LOGGER = LogManager.getLogger(UserService.class);
 
 
-    public ControllerUsuarios(UsuariosService usuariosService) {
-        this.usuariosService = usuariosService;
+    public ControllerUsuarios(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping
-    public List<Usuarios> getUsuarios() {
-        return usuariosService.getAllUsuarios();
+    public List<User> getUsuarios() {
+        return userService.getAllUsuarios();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuarios> getUsuarioById(@PathVariable Long id) {
-        Optional<Usuarios> usuario = usuariosService.getUsuarioById(id);
+    public ResponseEntity<User> getUsuarioById(@PathVariable Long id) {
+        Optional<User> usuario = userService.getUsuarioById(id);
         return usuario.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Usuarios createUsuario(@RequestBody DtoUsuarios usuario) {
+    public User createUsuario(@RequestBody DtoUsuarios usuario) {
         LOGGER.info(usuario.getName());
 
-        Usuarios usuarios = usuariosService.createUsuario(usuario);
+        User user = userService.createUsuario(usuario);
 
-        return usuarios;
+        return user;
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Usuarios> updateUsuario(@PathVariable Long id, @RequestBody Usuarios usuarioDetails) {
-        Optional<Usuarios> updatedUsuario = usuariosService.updateUsuario(id, usuarioDetails);
+    public ResponseEntity<User> updateUsuario(@PathVariable Long id, @RequestBody User usuarioDetails) {
+        Optional<User> updatedUsuario = userService.updateUsuario(id, usuarioDetails);
         return updatedUsuario.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUsuario(@PathVariable Long id) {
-        boolean isDeleted = usuariosService.deleteUsuario(id);
+        boolean isDeleted = userService.deleteUsuario(id);
         return isDeleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
     @PostMapping("/{username}/follow/{userToFollow}")
     public ResponseEntity<Void> followUser(@PathVariable String username, @PathVariable String userToFollow) {
-        Usuarios user = usuariosService.findByUsername(username);
-        Usuarios followUser = usuariosService.findByUsername(userToFollow);
-        usuariosService.followUser(user, followUser);
+        User user = userService.findByUsername(username);
+        User followUser = userService.findByUsername(userToFollow);
+        userService.followUser(user, followUser);
         return ResponseEntity.ok().build();
     }
 }
