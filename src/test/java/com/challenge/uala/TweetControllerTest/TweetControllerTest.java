@@ -2,8 +2,8 @@ package com.challenge.uala.TweetControllerTest;
 
 
 import com.challenge.uala.model.Tweet;
-import com.challenge.uala.serviceUsuarios.TweetService;
-import com.challenge.uala.controllerUsuarios.TweetController;
+import com.challenge.uala.services.TweetService.TweetService;
+import com.challenge.uala.controllers.TweetController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

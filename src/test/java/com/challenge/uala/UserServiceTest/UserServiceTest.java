@@ -1,9 +1,8 @@
 package com.challenge.uala.UserServiceTest;
 
 import com.challenge.uala.model.User;
-import com.challenge.uala.repoUsuarios.UserRepository;
-import com.challenge.uala.serviceUsuarios.UserService;
-import com.challenge.uala.serviceUsuarios.UserServiceImpl;
+import com.challenge.uala.repos.UserRepository;
+import com.challenge.uala.services.UserServiceImple.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

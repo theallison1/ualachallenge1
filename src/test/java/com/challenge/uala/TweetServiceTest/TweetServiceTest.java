@@ -2,9 +2,9 @@ package com.challenge.uala.TweetServiceTest;
 
 import com.challenge.uala.model.Tweet;
 import com.challenge.uala.model.User;
-import com.challenge.uala.repoUsuarios.TweetRepository;
-import com.challenge.uala.repoUsuarios.UserRepository;
-import com.challenge.uala.serviceUsuarios.TweetService;
+import com.challenge.uala.repos.TweetRepository;
+import com.challenge.uala.repos.UserRepository;
+import com.challenge.uala.services.TweetService.TweetService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

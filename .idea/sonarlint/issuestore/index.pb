@@ -33,3 +33,17 @@ w
 Gsrc/test/java/com/challenge/uala/TweetServiceTest/TweetServiceTest.java,5/b/5b5b7c9bd74c9615fe7fc4354f24a510dc669311
 }
 Msrc/test/java/com/challenge/uala/TweetControllerTest/TweetControllerTest.java,c/1/c18143a73de9f592c8a2fb3749951821e133367c
+9
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+j
+:src/main/java/com/challenge/uala/services/UserService.java,6/8/6846f4f09d159ae94e00f5d054067ad3f3eb29c1
+o
+?src/main/java/com/challenge/uala/services/TweetServiceImpl.java,8/7/8777a38f579a33dd048ff21ced4dd952c258c39c
+q
+Asrc/main/java/com/challenge/uala/controllers/TweetController.java,1/f/1fdd74410f059fc9bc53843a4302b49cf22e87a9
+z
+Jsrc/main/java/com/challenge/uala/services/TweetImple/TweetServiceImpl.java,5/1/51bb0b376581787da64b46aabf61609d2bdf23a8
+€
+Psrc/main/java/com/challenge/uala/services/TweetServiceImpl/TweetServiceImpl.java,3/5/35d72aefc3ad80edd2c123c7fffabf3ccaa6edcf
+v
+Fsrc/main/java/com/challenge/uala/services/UserService/UserService.java,6/5/653fe5d85e73506e8bf88eafa16317bc5ff451d2
