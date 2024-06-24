@@ -17,17 +17,18 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "tbl_user")
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotNull
     private String username;
 
-    @OneToMany(mappedBy = "usario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Tweet> tweets = new HashSet<>();
-
 
     @ManyToMany
     @JoinTable(name = "user_followers",
@@ -36,5 +37,5 @@ public class User {
     )
     private Set<User> followers;
 
-
+    // Getters and setters omitted for brevity
 }

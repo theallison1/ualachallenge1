@@ -1,24 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <!-- Parent POM para Spring Boot -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.1</version>
+        <version>3.0.0</version> <!-- Actualiza según la versión más reciente de Spring Boot -->
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
+    <!-- Información básica del proyecto -->
     <groupId>com.challenge</groupId>
     <artifactId>uala</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>uala</name>
     <description>challenge uala</description>
 
+    <!-- Propiedades del proyecto -->
     <properties>
-        <java.version>17</java.version>
+        <java.version>17</java.version> <!-- Versión de Java utilizada -->
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
-    <dependencies>
 
+    <!-- Dependencias del proyecto -->
+    <dependencies>
+        <!-- Dependencias de Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
@@ -27,31 +37,34 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
-
+        </dependency>
+        <!-- Dependencia de Jakarta Persistence -->
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.0.0</version> <!-- Ajusta según la versión más reciente de Jakarta Persistence -->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-
-
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-
+        <!-- Dependencia de Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <!-- Dependencias de pruebas -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -63,31 +76,60 @@
             <version>5.7.0</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>4.5.1</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
+    <!-- Configuración del plugin de compilación de Maven y Jacoco -->
     <build>
         <plugins>
+            <!-- Plugin de compilación de Maven -->
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.1.0</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version> <!-- Versión del plugin, ajusta según la versión actual -->
                 <configuration>
-                    <excludes>
-                        <exclude>
+                    <source>${java.version}</source> <!-- Utiliza la versión de Java definida en las propiedades -->
+                    <target>${java.version}</target> <!-- Utiliza la versión de Java definida en las propiedades -->
+                    <annotationProcessorPaths>
+                        <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
+                            <version>1.18.22</version> <!-- Versión de Lombok, ajusta según la versión actual -->
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
+
+            <!-- Plugin de Jacoco para generar reports de cobertura -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.7</version> <!-- Versión de Jacoco, ajusta según la versión actual -->
+                <executions>
+                    <!-- Configuración para preparar Jacoco antes de ejecutar las pruebas -->
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <!-- Configuración para generar los reports de cobertura -->
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Otros plugins de Maven que estés utilizando -->
         </plugins>
     </build>
 

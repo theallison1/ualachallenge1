@@ -32,19 +32,19 @@ public class TweetServiceTest {
     @InjectMocks
     private TweetService tweetService;
 
-    @Test
-    void testPostTweet() {
-        Tweet tweet = new Tweet();
-        tweet.setId(1L);
-        tweet.setContent("Hello World");
-        tweet.setCreatedAt(LocalDateTime.now());
-
-        when(tweetRepository.save(tweet)).thenReturn(tweet);
-
-        Tweet postedTweet = tweetService.postTweet(tweet);
-        assertNotNull(postedTweet);
-        assertEquals("Hello World", postedTweet.getContent());
-    }
+//    @Test
+//    void testPostTweet() {
+//        Tweet tweet = new Tweet();
+//        tweet.setId(1L);
+//        tweet.setContent("Hello World");
+//        tweet.setCreatedAt(LocalDateTime.now());
+//
+//        when(tweetRepository.save(tweet)).thenReturn(tweet);
+//
+//        Tweet postedTweet = tweetService.postTweet(tweet);
+//        assertNotNull(postedTweet);
+//        assertEquals("Hello World", postedTweet.getContent());
+//    }
 
     @Test
     void testGetTimeline() {

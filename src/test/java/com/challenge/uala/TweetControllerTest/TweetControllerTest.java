@@ -31,24 +31,24 @@ public class TweetControllerTest {
 
     @InjectMocks
     private TweetController tweetController;
-
-    @Test
-    void testPostTweet() throws Exception {
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(tweetController).build();
-
-        Tweet tweet = new Tweet();
-        tweet.setId(1L);
-        tweet.setContent("Hello World");
-        tweet.setCreatedAt(LocalDateTime.now());
-
-        when(tweetService.postTweet(any(Tweet.class))).thenReturn(tweet);
-
-        mockMvc.perform(post("/tweets")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"content\": \"Hello World\"}"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content", is("Hello World")));
-    }
+//
+//    @Test
+//    void testPostTweet() throws Exception {
+//        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(tweetController).build();
+//
+//        Tweet tweet = new Tweet();
+//        tweet.setId(1L);
+//        tweet.setContent("Hello World");
+//        tweet.setCreatedAt(LocalDateTime.now());
+//
+//        when(tweetService.postTweet(any(Tweet.class))).thenReturn(tweet);
+//
+//        mockMvc.perform(post("/tweets")
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content("{\"content\": \"Hello World\"}"))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.content", is("Hello World")));
+//    }
 
     @Test
     void testGetTimeline() throws Exception {

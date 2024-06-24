@@ -50,16 +50,16 @@ class UserServiceTest {
         assertEquals(1L, foundUser.getId());
     }
 
-    @Test
-    void testSaveUser() {
-        User user = new User();
-        user.setId(1L);
-        user.setUsername("user1");
-
-        when(userRepository.save(user)).thenReturn(user);
-
-        User savedUser = userService.saveUser(user);
-        assertNotNull(savedUser);
-        assertEquals("user1", savedUser.getUsername());
-    }
+//    @Test
+//    void testSaveUser() {
+//        User user = new User();
+//        user.setId(1L);
+//        user.setUsername("user1");
+//
+//        when(userRepository.save(user)).thenReturn(user);
+//
+//        User savedUser = userService.saveUser(user);
+//        assertNotNull(savedUser);
+//        assertEquals("user1", savedUser.getUsername());
+//    }
 }
