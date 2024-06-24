@@ -40,6 +40,9 @@ public class ControllerUsuarios {
 
     @PostMapping("/{username}/follow/{userToFollow}")
     public ResponseEntity<Void> followUser(@PathVariable String username, @PathVariable String userToFollow) {
+        LOGGER.info(username,userToFollow);
+        LOGGER.info("-----------------------------------");
+
         User user = userService.findByUsername(username);
         User followUser = userService.findByUsername(userToFollow);
 

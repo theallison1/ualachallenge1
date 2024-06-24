@@ -5,8 +5,6 @@
 pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
 j
 :src/test/java/com/challenge/uala/UalaApplicationTests.java,9/8/98925b96649864f619fc9816adcd3351b883355d
-s
-Csrc/main/java/com/challenge/uala/model/DtoUsuarios/DtoUsuarios.java,8/a/8ab831b5cc8d71f26fa852d98332534f2f1fab99
 a
 1src/main/java/com/challenge/uala/model/Tweet.java,1/5/15a706068003fa072b962ffbb02a6cca5ab24606
 `
@@ -31,7 +29,9 @@ Dsrc/main/java/com/challenge/uala/controllers/ControllerUsuarios.java,c/1/c1bbd
 Osrc/main/java/com/challenge/uala/services/UserServiceImple/UserServiceImpl.java,d/8/d8212afda78a2903331b6f3e0f2c1133dd313fd8
 x
 Hsrc/main/java/com/challenge/uala/services/TweetService/TweetService.java,3/d/3d81d0d7402e6e659dbc8e87cc799d2b8e4d2fe9
-m
-=src/main/java/com/challenge/uala/model/TweetDto/TweetDto.java,5/d/5d5775e8fc09a7cd1fcdc3f9be5fa7e372efcfa2
 k
 ;src/main/java/com/challenge/uala/repos/TweetRepository.java,7/1/715e67791abb807daa465bc0f332b713893309b9
+j
+:src/main/java/com/challenge/uala/config/SwaggerConfig.java,6/1/61f8b16a2a9e88c35862936273f0bfa344544d2c
+j
+:src/main/java/com/challenge/uala/repos/UserRepository.java,9/2/9215470b31e5d9db2f3ea4318c272fd08d149e28

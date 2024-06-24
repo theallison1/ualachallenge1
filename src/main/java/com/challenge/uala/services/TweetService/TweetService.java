@@ -9,4 +9,6 @@ public interface TweetService {
     public Tweet postTweet(TweetDTO tweet) ;
 
     public List<Tweet> getTimeline(Long userId) ;
+
+    List<Tweet> getTimelineForUser(Long userId);
 }

@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.0</version> <!-- Actualiza según la versión más reciente de Spring Boot -->
+        <version>3.3.1</version> <!-- Versión de Spring Boot actualizada -->
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -37,6 +37,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+        <!-- Spring Boot Starter Web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -44,18 +49,17 @@
         </dependency>
         <!-- Dependencia de Jakarta Persistence -->
         <dependency>
-            <groupId>jakarta.persistence</groupId>
-            <artifactId>jakarta.persistence-api</artifactId>
-            <version>3.0.0</version> <!-- Ajusta según la versión más reciente de Jakarta Persistence -->
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>3.0.2</version>
         </dependency>
+
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>7.0.1.Final</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+
 
         <!-- Dependencia de Lombok -->
         <dependency>
@@ -82,11 +86,37 @@
             <version>4.5.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.0.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version> <!-- Versión más reciente de Servlet API -->
+            <scope>provided</scope>
+        </dependency>
+
+
     </dependencies>
 
     <!-- Configuración del plugin de compilación de Maven y Jacoco -->
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.3.1</version> <!-- Ajusta la versión según la versión de Spring Boot que estés utilizando -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <!-- Plugin de compilación de Maven -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -102,6 +132,9 @@
                             <version>1.18.22</version> <!-- Versión de Lombok, ajusta según la versión actual -->
                         </path>
                     </annotationProcessorPaths>
+                    <compilerArgs>
+                        <arg>-proc:none</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
 
@@ -127,6 +160,16 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <!-- Plugin de recursos de Maven -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.0</version> <!-- Ajusta según la versión actual del plugin -->
+                <configuration>
+                    <encoding>UTF-8</encoding> <!-- Configura la codificación a UTF-8 -->
+                </configuration>
             </plugin>
 
             <!-- Otros plugins de Maven que estés utilizando -->

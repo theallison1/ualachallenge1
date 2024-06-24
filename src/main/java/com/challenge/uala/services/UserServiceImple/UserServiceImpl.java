@@ -4,27 +4,34 @@ import com.challenge.uala.model.DtoUsuarios.UserDTO;
 import com.challenge.uala.model.Tweet;
 
 import com.challenge.uala.model.User;
+import com.challenge.uala.repos.TweetRepository;
 import com.challenge.uala.repos.UserRepository;
 import com.challenge.uala.services.UserService.UserService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final TweetRepository tweetRepository;
 
-    public UserServiceImpl(UserRepository usuarioRepository) {
+    public UserServiceImpl(UserRepository usuarioRepository, TweetRepository tweetRepository) {
         this.userRepository = usuarioRepository;
+        this.tweetRepository = tweetRepository;
     }
 
     public User getUserById(Long id) {
+
         return userRepository.findById(id).orElse(null);
     }
     @Override
     public User findByUsername(String username) {
-        return null;
+        return userRepository.findByUsername(username);
     }
     public User saveUser(UserDTO userDTO) {
         User user = new User();
@@ -46,6 +53,10 @@ public class UserServiceImpl implements UserService {
     public void followUser(User user, User userToFollow) {
         user.getFollowers().add(userToFollow); // Añade userToFollow a los seguidores de user
         userRepository.save(user); // Guarda el usuario actualizado en la base de datos
+    }
+    public List<User> getUsersFollowedByUser(Long userId) {
+        User user = getUserById(userId);
+        return new ArrayList<>(user.getFollowers());
     }
 
 }
