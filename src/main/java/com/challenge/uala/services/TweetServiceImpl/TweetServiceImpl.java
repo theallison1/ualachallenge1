@@ -34,7 +34,6 @@ public class TweetServiceImpl implements TweetService {
     }
 
     public List<Tweet> getTimeline(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow();
-        return tweetRepository.findByUserInOrderByCreatedAtDesc(List.copyOf(user.getFollowers()));
+        return tweetRepository.findByUserId(userId);
     }
 }

@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface TweetRepository  extends JpaRepository<Tweet, Long> {
     List<Tweet> findByUserInOrderByCreatedAtDesc(List<User> users);
+
+    List<Tweet> findByUserId(Long userId);
 }

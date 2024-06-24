@@ -33,3 +33,5 @@ x
 Hsrc/main/java/com/challenge/uala/services/TweetService/TweetService.java,3/d/3d81d0d7402e6e659dbc8e87cc799d2b8e4d2fe9
 m
 =src/main/java/com/challenge/uala/model/TweetDto/TweetDto.java,5/d/5d5775e8fc09a7cd1fcdc3f9be5fa7e372efcfa2
+k
+;src/main/java/com/challenge/uala/repos/TweetRepository.java,7/1/715e67791abb807daa465bc0f332b713893309b9
