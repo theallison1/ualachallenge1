@@ -35,3 +35,16 @@ j
 :src/main/java/com/challenge/uala/config/SwaggerConfig.java,6/1/61f8b16a2a9e88c35862936273f0bfa344544d2c
 j
 :src/main/java/com/challenge/uala/repos/UserRepository.java,9/2/9215470b31e5d9db2f3ea4318c272fd08d149e28
+:
+
+dockerfile,5/5/558c49b604560afd1841f2a7b49e2f60bd1f99b3
+:
+
+Dockerfile,6/6/6651ddff6eb82c840ced7c1dddee15c6e1913dd4
+B
+docker-compose.yml,3/5/35b8c13cf2eb2a194eada000eb310d65aed53b2a
+@
+Dockerfile-nginx,4/a/4aa7d7430b10fd066334e09a9a97c702fdbb64c4
+:
+
+nginx.conf,e/d/ed8b45da44d73de79bd7c1c203a419d6ee7d6fde
