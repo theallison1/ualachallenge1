@@ -1,5 +1,6 @@
 package com.challenge.uala.services.UserServiceImple;
 
+import com.challenge.uala.exception.UserNotFoundException;
 import com.challenge.uala.model.DtoUsuarios.UserDTO;
 import com.challenge.uala.model.Tweet;
 
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService {
 
     public User getUserById(Long id) {
 
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     }
     @Override
     public User findByUsername(String username) {

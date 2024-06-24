@@ -1,5 +1,3 @@
 
 ½
-java:S6204I"zReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()' and ensure that the list is unmodified.(œçÖß8„îóá„2J$f734612e-41b7-48ed-9e75-0987fb39e87e
-r
-java:S1068"/Remove this unused "tweetMapper" private field.(Æ¼Ê€8 ò‰â„2J$ae96400a-da87-4085-91b2-4252ad5a5670
+java:S62048"zReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()' and ensure that the list is unmodified.(ª™¨¹8¹¸Îã„2J$49a21c8e-80f7-446b-9901-74a07310961a

@@ -48,3 +48,7 @@ m
 =src/main/java/com/challenge/uala/model/TweetDto/TweetDTO.java,a/5/a567c032624ca4b5ae74ca93dd382e81e4853cff
 h
 8src/main/java/com/challenge/uala/mapper/TweetMapper.java,b/e/be24d6af44612b055a8eae38df308998c621e5a8
+u
+Esrc/main/java/com/challenge/uala/exception/UserNotFoundException.java,7/e/7ea67041e9d18e6ec5953eaa233582c8480d9886
+v
+Fsrc/main/java/com/challenge/uala/exception/GlobalExceptionHandler.java,6/9/69eb75887dfbc4408fe563967347d5777b3609ba
