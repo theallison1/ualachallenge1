@@ -32,15 +32,7 @@ Hsrc/main/java/com/challenge/uala/services/TweetService/TweetService.java,3/d/3
 k
 ;src/main/java/com/challenge/uala/repos/TweetRepository.java,7/1/715e67791abb807daa465bc0f332b713893309b9
 j
-:src/main/java/com/challenge/uala/config/SwaggerConfig.java,6/1/61f8b16a2a9e88c35862936273f0bfa344544d2c
-j
 :src/main/java/com/challenge/uala/repos/UserRepository.java,9/2/9215470b31e5d9db2f3ea4318c272fd08d149e28
-:
-
-dockerfile,5/5/558c49b604560afd1841f2a7b49e2f60bd1f99b3
-:
-
-Dockerfile,6/6/6651ddff6eb82c840ced7c1dddee15c6e1913dd4
 B
 docker-compose.yml,3/5/35b8c13cf2eb2a194eada000eb310d65aed53b2a
 @
@@ -48,3 +40,11 @@ B
 :
 
 nginx.conf,e/d/ed8b45da44d73de79bd7c1c203a419d6ee7d6fde
+>
+Dockerfile-app,5/a/5a3dad35b45a1093ead12e80dd6d39398ef97c62
+r
+Bsrc/main/java/com/challenge/uala/util/UserIdentifierExtractor.java,7/d/7d9a8da8426e39e7cbad6553b73efd1fa4ea1c47
+m
+=src/main/java/com/challenge/uala/model/TweetDto/TweetDTO.java,a/5/a567c032624ca4b5ae74ca93dd382e81e4853cff
+h
+8src/main/java/com/challenge/uala/mapper/TweetMapper.java,b/e/be24d6af44612b055a8eae38df308998c621e5a8

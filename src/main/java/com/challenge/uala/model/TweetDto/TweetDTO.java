@@ -1,11 +1,24 @@
 package com.challenge.uala.model.TweetDto;
 
+import java.time.LocalDateTime;
+
 public class TweetDTO {
 
     private String content;
     private Long userId; // Este campo se usará para referenciar el usuario asociado al tweet
 
+    private LocalDateTime createdAt;
+
     // Getters y Setters
+
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 
     public String getContent() {
         return content;
