@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -59,34 +58,47 @@ public class UserServiceImpl implements UserService {
         dto.setUsername(user.getUsername());
 
         // Cargar los IDs de los tweets
-        Set<Long> tweetIds = user.getTweets().stream()
-                .map(Tweet::getId)
-                .collect(Collectors.toSet());
-        dto.setTweetIds(tweetIds);
+        dto.setTweetIds(mapTweetIds(user));
 
-        // Evitar recursión infinita al mapear seguidores
-        if (user.getFollowers() != null) {
-            Set<UserDtoResponse> followers = user.getFollowers().stream()
-                    .map(follower -> {
-                        // Mapear cada seguidor a UserDtoResponse, evitando recursión directa
-                        UserDtoResponse followerDto = new UserDtoResponse();
-                        followerDto.setId(follower.getId());
-                        followerDto.setUsername(follower.getUsername());
-                        // Puedes agregar más campos según sea necesario
-                        return followerDto;
-                    })
-                    .collect(Collectors.toSet());
-            dto.setFollowers(followers);
+        // Cargar los followers completos
+        dto.setFollowers(mapFollowers(user));
 
-            // Cargar solo los IDs de los followers
-            Set<Long> followerIds = user.getFollowers().stream()
-                    .map(User::getId)
-                    .collect(Collectors.toSet());
-            dto.setFollowerIds(followerIds);
-        }
+        // Cargar solo los IDs de los followers
+        dto.setFollowerIds(mapFollowerIds(user));
 
         return dto;
     }
+
+    private Set<Long> mapTweetIds(User user) {
+        return user.getTweets().stream()
+                .map(Tweet::getId)
+                .collect(Collectors.toSet());
+    }
+
+    private Set<UserDtoResponse> mapFollowers(User user) {
+        return user.getFollowers().stream()
+                .map(this::mapFollowerToDto)
+                .collect(Collectors.toSet());
+    }
+
+    private UserDtoResponse mapFollowerToDto(User follower) {
+        UserDtoResponse followerDto = new UserDtoResponse();
+        followerDto.setId(follower.getId());
+        followerDto.setUsername(follower.getUsername());
+        // Cargar los IDs de los tweets de cada seguidor
+        followerDto.setTweetIds(mapTweetIds(follower));
+        // Cargar solo los IDs de los followers de cada seguidor
+        followerDto.setFollowerIds(mapFollowerIds(follower));
+        return followerDto;
+    }
+
+    private Set<Long> mapFollowerIds(User user) {
+        return user.getFollowers().stream()
+                .map(User::getId)
+                .collect(Collectors.toSet());
+    }
+
+
 
 
     @Override
