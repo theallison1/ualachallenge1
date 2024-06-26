@@ -1,12 +1,16 @@
 
-“
-java:S3655)"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(øÍ¿8¡úÔ¶…2J$fadedbd1-7cca-4706-9109-c53812f8ad20
-	java:S112£"FDefine and throw a dedicated exception instead of using a generic one.(¡·™âûÿÿÿÿ8£úÔ¶…2J$bd561cff-a719-430b-9920-ada0fa7564e5
-
-java:S6809—"UCall transactional methods via an injected dependency instead of directly via 'this'.(†Ö¼„ùÿÿÿÿ8‹ûÔ¶…2J$c5f34f00-44c4-4794-9a66-6be5245371ad
-¾
-java:S6204 "zReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()' and ensure that the list is unmodified.(ª™¨¹8ûÔ¶…2J$614e1dd6-c108-4507-80a8-3ceb5c00dec5
-
-java:S6809Ÿ"UCall transactional methods via an injected dependency instead of directly via 'this'.(ÔÂÀüÿÿÿÿ8’ûÔ¶…2J$f99c150e-d033-46ea-b387-6b098b87cf39
-{
-java:S1068"3Remove this unused "tweetRepository" private field.(åÌøÃûÿÿÿÿ8üö¶…2J$cf6598be-1434-471a-b557-a8a906bcaa02
+	java:S112L"FDefine and throw a dedicated exception instead of using a generic one.(ÅÙÍĞúÿÿÿÿ8Â‚Ä·…2J$4682404d-9bed-477e-a773-9bd3bea690e4
+g	java:S112O"FDefine and throw a dedicated exception instead of using a generic one.(³ï‚¯øÿÿÿÿ8ÿíÎ·…2
+g	java:S112_"FDefine and throw a dedicated exception instead of using a generic one.(¡·™âûÿÿÿÿ8ÿíÎ·…2
+z
+java:S2139F"XEither log this exception and handle it, or rethrow it with some contextual information.(å½³öşÿÿÿÿ8¡îÎ·…2
+z
+java:S2139J"XEither log this exception and handle it, or rethrow it with some contextual information.(Ï¤¦úÿÿÿÿ8¤îÎ·…2
+u
+java:S2139M"XEither log this exception and handle it, or rethrow it with some contextual information.(”ı¾8§îÎ·…2
+
+java:S6809X"UCall transactional methods via an injected dependency instead of directly via 'this'.(†Ö¼„ùÿÿÿÿ8ÕæÉ·…2J$82e83b0b-0ce1-40e4-9ddb-e15c5e909269
+½
+java:S6204]"zReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()' and ensure that the list is unmodified.(ª™¨¹8Ú‚Ä·…2J$fb86cd27-8928-4ae7-9a61-8631aedd5f44
+—
+java:S6809\"UCall transactional methods via an injected dependency instead of directly via 'this'.(ÚÊ%8Ü‚Ä·…2J$4e4ae473-8ce1-454d-8041-48200496fd5d

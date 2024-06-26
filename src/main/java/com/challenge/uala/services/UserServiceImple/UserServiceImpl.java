@@ -4,163 +4,124 @@ import com.challenge.uala.model.DtoUsuarios.UserDTO;
 import com.challenge.uala.model.DtoUsuarios.UserDtoResponse;
 import com.challenge.uala.model.Tweet;
 import com.challenge.uala.model.User;
-import com.challenge.uala.repos.TweetRepository;
 import com.challenge.uala.repos.UserRepository;
 import com.challenge.uala.services.UserService.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 @Service
 @Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final TweetRepository tweetRepository;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
-
-
-    public UserServiceImpl(UserRepository userRepository, TweetRepository tweetRepository) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-
-        this.tweetRepository = tweetRepository;
     }
-
 
     @Override
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username).get();
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con nombre de usuario: " + username));
     }
-
-
-
-    @Override
-    @Transactional(readOnly = true)
-    public UserDtoResponse getUserById(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id: " + userId));
-
-        return mapUserToDtoResponse(user);
-    }
-
-    private UserDtoResponse mapUserToDtoResponse(User user) {
-        UserDtoResponse dto = new UserDtoResponse();
-        dto.setId(user.getId());
-        dto.setUsername(user.getUsername());
-
-        // Cargar los IDs de los tweets
-        dto.setTweetIds(mapTweetIds(user));
-
-        // Cargar los followers completos
-        dto.setFollowers(mapFollowers(user));
-
-        // Cargar solo los IDs de los followers
-        dto.setFollowerIds(mapFollowerIds(user));
-
-        return dto;
-    }
-
-    private Set<Long> mapTweetIds(User user) {
-        return user.getTweets().stream()
-                .map(Tweet::getId)
-                .collect(Collectors.toSet());
-    }
-
-    private Set<UserDtoResponse> mapFollowers(User user) {
-        return user.getFollowers().stream()
-                .map(this::mapFollowerToDto)
-                .collect(Collectors.toSet());
-    }
-
-    private UserDtoResponse mapFollowerToDto(User follower) {
-        UserDtoResponse followerDto = new UserDtoResponse();
-        followerDto.setId(follower.getId());
-        followerDto.setUsername(follower.getUsername());
-        // Cargar los IDs de los tweets de cada seguidor
-        followerDto.setTweetIds(mapTweetIds(follower));
-        // Cargar solo los IDs de los followers de cada seguidor
-        followerDto.setFollowerIds(mapFollowerIds(follower));
-        return followerDto;
-    }
-
-    private Set<Long> mapFollowerIds(User user) {
-        return user.getFollowers().stream()
-                .map(User::getId)
-                .collect(Collectors.toSet());
-    }
-
-
-
 
     @Override
     @Transactional
     public UserDtoResponse saveUser(UserDTO userDTO) {
-        // Crear una instancia de User y asignar el username desde el UserDTO
         User user = new User();
         user.setUsername(userDTO.getUsername());
-
-        // Guardar el usuario en el repositorio
         user = userRepository.save(user);
 
-        // Crear un UserDtoResponse a partir del User guardado
-        UserDtoResponse response = new UserDtoResponse();
-        response.setId(user.getId());
-        response.setUsername(user.getUsername());
-
-        // Obtener tweetIds y followerIds si es necesario
-        Set<Long> tweetIds = user.getTweets() != null ?
-                user.getTweets().stream()
-                        .map(Tweet::getId)
-                        .collect(Collectors.toSet()) :
-                Collections.emptySet();
-
-        response.setTweetIds(tweetIds);
-
-        return response;
+        return mapUserToDtoResponse(user);
     }
 
     @Override
     @Transactional
     public void followUser(User user, User userToFollow) {
         if (!user.getFollowing().contains(userToFollow)) {
-            LOGGER.info("Adding {} to {}'s following list", userToFollow.getUsername(), user.getUsername());
+            LOGGER.info("Añadiendo {} a la lista de seguidos de {}", userToFollow.getUsername(), user.getUsername());
             user.getFollowing().add(userToFollow);
             userToFollow.getFollowers().add(user);
             userRepository.save(user);
             userRepository.save(userToFollow);
-            LOGGER.info("Successfully followed: {} -> {}", user.getUsername(), userToFollow.getUsername());
+            LOGGER.info("Seguimiento exitoso: {} -> {}", user.getUsername(), userToFollow.getUsername());
         } else {
-            LOGGER.info("{} is already following {}", user.getUsername(), userToFollow.getUsername());
+            LOGGER.info("{} ya está siguiendo a {}", user.getUsername(), userToFollow.getUsername());
         }
     }
 
     @Override
     @Transactional(readOnly = true)
+    public UserDtoResponse getUserById(Long userId) {
+        try {
+            User user = userRepository.findById(userId)
+                    .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id: " + userId));
+
+            return mapUserToDtoResponse(user);
+        } catch (EntityNotFoundException e) {
+            // Loguear la excepción o manejarla según sea necesario
+            LOGGER.error("Usuario no encontrado con id: {}", userId, e);
+            throw e; // Re-lanzar la excepción para que sea manejada por el controlador o capa superior
+        } catch (DataAccessException e) {
+            LOGGER.error("Excepción de acceso a datos al buscar usuario con id: {}", userId, e);
+            throw new RuntimeException("Error al acceder a datos al buscar usuario", e); // Ejemplo de manejo adicional
+        } catch (Exception e) {
+            LOGGER.error("Otra excepción al buscar usuario con id: {}", userId, e);
+            throw new RuntimeException("Error inesperado al buscar usuario", e); // Manejo de excepciones generales
+        }
+    }
+
+
+    @Override
+    @Transactional(readOnly = true)
     public List<UserDtoResponse> getUsersFollowedByUser(Long userId) {
         try {
-            // Obtener el usuario por su ID
             UserDtoResponse userDtoResponse = this.getUserById(userId);
-
-            // Obtener los seguidores del usuario
             Set<UserDtoResponse> followers = userDtoResponse.getFollowers();
 
-            // Convertir los seguidores a UserDtoResponse
-
             return followers.stream()
-                    .map(follower -> this.getUserById(follower.getId()))
+                    .map(follower -> getUserById(follower.getId()))
                     .collect(Collectors.toList());
         } catch (EntityNotFoundException e) {
-            // Manejar la excepción si el usuario no se encuentra
             throw new RuntimeException("No se pudo encontrar el usuario con ID: " + userId, e);
         }
+    }
+
+    private UserDtoResponse mapUserToDtoResponse(User user) {
+        UserDtoResponse dto = new UserDtoResponse();
+        dto.setId(user.getId());
+        dto.setUsername(user.getUsername());
+        dto.setTweetIds(user.getTweets().stream()
+                .map(Tweet::getId)
+                .collect(Collectors.toSet()));
+        dto.setFollowers(user.getFollowers().stream()
+                .map(this::mapFollowerToDto)
+                .collect(Collectors.toSet()));
+        dto.setFollowerIds(user.getFollowers().stream()
+                .map(User::getId)
+                .collect(Collectors.toSet()));
+        return dto;
+    }
+
+    private UserDtoResponse mapFollowerToDto(User follower) {
+        UserDtoResponse followerDto = new UserDtoResponse();
+        followerDto.setId(follower.getId());
+        followerDto.setUsername(follower.getUsername());
+        followerDto.setTweetIds(follower.getTweets().stream()
+                .map(Tweet::getId)
+                .collect(Collectors.toSet()));
+        followerDto.setFollowerIds(follower.getFollowers().stream()
+                .map(User::getId)
+                .collect(Collectors.toSet()));
+        return followerDto;
     }
 }
