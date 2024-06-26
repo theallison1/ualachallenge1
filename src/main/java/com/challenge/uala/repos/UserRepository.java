@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
-    User findByUsername(String username);
+    Optional<User> findByUsername(String username);
     @EntityGraph(attributePaths = {"tweets", "followers"})
     Optional<User> findById(@Param("userId") Long userId);
 

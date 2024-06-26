@@ -44,7 +44,7 @@ class UserServiceTest {
         user.setId(1L);
         user.setUsername("user1");
 
-        when(userRepository.findByUsername("user1")).thenReturn(user);
+        when(userRepository.findByUsername("user1").get()).thenReturn(user);
 
         User foundUser = userService.findByUsername("user1");
         assertNotNull(foundUser);

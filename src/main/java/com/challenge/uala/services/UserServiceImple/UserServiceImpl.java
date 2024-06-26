@@ -7,16 +7,15 @@ import com.challenge.uala.model.User;
 import com.challenge.uala.repos.TweetRepository;
 import com.challenge.uala.repos.UserRepository;
 import com.challenge.uala.services.UserService.UserService;
-import jakarta.persistence.EntityGraph;
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.PersistenceContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -27,22 +26,23 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final TweetRepository tweetRepository;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
+
+
+
     public UserServiceImpl(UserRepository userRepository, TweetRepository tweetRepository) {
         this.userRepository = userRepository;
+
         this.tweetRepository = tweetRepository;
     }
 
 
     @Override
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.findByUsername(username).get();
     }
 
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    // ...
 
     @Override
     @Transactional(readOnly = true)
@@ -59,19 +59,31 @@ public class UserServiceImpl implements UserService {
         dto.setUsername(user.getUsername());
 
         // Cargar los IDs de los tweets
-        dto.setTweetIds(user.getTweets().stream()
+        Set<Long> tweetIds = user.getTweets().stream()
                 .map(Tweet::getId)
-                .collect(Collectors.toSet()));
+                .collect(Collectors.toSet());
+        dto.setTweetIds(tweetIds);
 
-        // Cargar los followers completos
-        dto.setFollowers(user.getFollowers().stream()
-                .map(this::mapUserToDtoResponse)
-                .collect(Collectors.toSet()));
+        // Evitar recursión infinita al mapear seguidores
+        if (user.getFollowers() != null) {
+            Set<UserDtoResponse> followers = user.getFollowers().stream()
+                    .map(follower -> {
+                        // Mapear cada seguidor a UserDtoResponse, evitando recursión directa
+                        UserDtoResponse followerDto = new UserDtoResponse();
+                        followerDto.setId(follower.getId());
+                        followerDto.setUsername(follower.getUsername());
+                        // Puedes agregar más campos según sea necesario
+                        return followerDto;
+                    })
+                    .collect(Collectors.toSet());
+            dto.setFollowers(followers);
 
-        // Opcional: Cargar solo los IDs de los followers
-        dto.setFollowerIds(user.getFollowers().stream()
-                .map(User::getId)
-                .collect(Collectors.toSet()));
+            // Cargar solo los IDs de los followers
+            Set<Long> followerIds = user.getFollowers().stream()
+                    .map(User::getId)
+                    .collect(Collectors.toSet());
+            dto.setFollowerIds(followerIds);
+        }
 
         return dto;
     }
@@ -93,9 +105,11 @@ public class UserServiceImpl implements UserService {
         response.setUsername(user.getUsername());
 
         // Obtener tweetIds y followerIds si es necesario
-        Set<Long> tweetIds = user.getTweets().stream()
-                .map(Tweet::getId)
-                .collect(Collectors.toSet());
+        Set<Long> tweetIds = user.getTweets() != null ?
+                user.getTweets().stream()
+                        .map(Tweet::getId)
+                        .collect(Collectors.toSet()) :
+                Collections.emptySet();
 
         response.setTweetIds(tweetIds);
 
@@ -105,8 +119,16 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void followUser(User user, User userToFollow) {
-        user.getFollowers().add(userToFollow); // Añade userToFollow a los seguidores de user
-        userRepository.save(user); // Guarda el usuario actualizado en la base de datos
+        if (!user.getFollowing().contains(userToFollow)) {
+            LOGGER.info("Adding {} to {}'s following list", userToFollow.getUsername(), user.getUsername());
+            user.getFollowing().add(userToFollow);
+            userToFollow.getFollowers().add(user);
+            userRepository.save(user);
+            userRepository.save(userToFollow);
+            LOGGER.info("Successfully followed: {} -> {}", user.getUsername(), userToFollow.getUsername());
+        } else {
+            LOGGER.info("{} is already following {}", user.getUsername(), userToFollow.getUsername());
+        }
     }
 
     @Override
@@ -120,11 +142,10 @@ public class UserServiceImpl implements UserService {
             Set<UserDtoResponse> followers = userDtoResponse.getFollowers();
 
             // Convertir los seguidores a UserDtoResponse
-            List<UserDtoResponse> followersDtoResponses = followers.stream()
+
+            return followers.stream()
                     .map(follower -> this.getUserById(follower.getId()))
                     .collect(Collectors.toList());
-
-            return followersDtoResponses;
         } catch (EntityNotFoundException e) {
             // Manejar la excepción si el usuario no se encuentra
             throw new RuntimeException("No se pudo encontrar el usuario con ID: " + userId, e);

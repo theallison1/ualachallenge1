@@ -9,6 +9,8 @@
     import lombok.NoArgsConstructor;
 
     import java.util.HashSet;
+    import java.util.List;
+    import java.util.Objects;
     import java.util.Set;
 
 
@@ -29,13 +31,35 @@
 
 
         @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-        private Set<Tweet> tweets = new HashSet<>();
+        private List<Tweet> tweets;
 
-        @ManyToMany(fetch = FetchType.LAZY)
-        @JoinTable(name = "user_followers",
+        @ManyToMany
+        @JoinTable(
+                name = "user_followers",
                 joinColumns = @JoinColumn(name = "user_id"),
                 inverseJoinColumns = @JoinColumn(name = "follower_id")
         )
-        private Set<User> followers;
-        // Getters and setters omitted for brevity
+        private Set<User> followers = new HashSet<>();
+
+        @ManyToMany(mappedBy = "followers")
+        private Set<User> following = new HashSet<>();
+
+        public void addFollower(User follower) {
+            followers.add(follower);
+            follower.getFollowing().add(this);
+        }
+
+        public void removeFollower(User follower) {
+            followers.remove(follower);
+            follower.getFollowing().remove(this);
+        }
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            User user = (User) o;
+            return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(tweets, user.tweets) && Objects.equals(followers, user.followers);
+        }
+
+
     }

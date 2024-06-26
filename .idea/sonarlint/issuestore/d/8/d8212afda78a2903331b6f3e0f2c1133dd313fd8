@@ -1,19 +1,14 @@
 
-°
-java:S1488{"mImmediately return this expression instead of assigning it to the temporary variable "followersDtoResponses".(Æş8®åĞ…2J$35ccd13e-bc4d-4773-8cae-f6aae828d2f5
-	java:S112‚"FDefine and throw a dedicated exception instead of using a generic one.(¡·™âûÿÿÿÿ8±åĞ…2J$ae03034c-f028-45a7-81d5-35598367c179
-
-java:S6809u"UCall transactional methods via an injected dependency instead of directly via 'this'.(†Ö¼„ùÿÿÿÿ8ĞåĞ…2J$43cde801-91cb-4ded-b7b6-e02febd52780
-½
-java:S6204}"zReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()' and ensure that the list is unmodified.(ª™¨¹8ÑåĞ…2J$d4ed36eb-5334-42f7-98dd-34e90d7ebdf5
-
-java:S6809|"UCall transactional methods via an injected dependency instead of directly via 'this'.(ÔÂÀüÿÿÿÿ8ÓåĞ…2J$fe7d3e79-6d7f-4b51-8daa-43fbd977be2c
-
-java:S1128
-"<Remove this unused import 'jakarta.persistence.EntityGraph'.(à©§8ò›»…2J$72d403d1-2357-49b9-b9d5-0ac465938d3e
-v
-java:S1128".Remove this unused import 'java.util.HashMap'.(™˜”€ùÿÿÿÿ8ó›»…2J$8172bf19-44c5-485e-9699-2f5547aead12
-r
-java:S1128"*Remove this unused import 'java.util.Map'.(¼è½Òşÿÿÿÿ8ó›»…2J$6b852eb7-39e6-4d7d-9846-80ed0c4c586a
+“
+java:S3655*"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(øÍ¿8¡úÔ¶…2J$bcde08cd-dfee-4b93-8f2e-484ec363f714
+	java:S112—"FDefine and throw a dedicated exception instead of using a generic one.(¡·™âûÿÿÿÿ8£úÔ¶…2J$0b1e38f4-72b6-444c-b652-3f2555b3919e
+
+java:S6809‹"UCall transactional methods via an injected dependency instead of directly via 'this'.(†Ö¼„ùÿÿÿÿ8‹ûÔ¶…2J$749636ed-43e5-497f-8687-b648f83581fb
+¾
+java:S6204”"zReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()' and ensure that the list is unmodified.(ª™¨¹8ûÔ¶…2J$afce9a7b-96fa-43f9-96d8-ea7a5135b4f0
+
+java:S6809“"UCall transactional methods via an injected dependency instead of directly via 'this'.(ÔÂÀüÿÿÿÿ8’ûÔ¶…2J$fad3b0b5-2855-4f1c-9abc-49a94da17f81
+w
+java:S1128"/Remove this unused import 'java.util.Optional'.(¨˜ëİüÿÿÿÿ8˜ûÔ¶…2J$f3b996a4-756f-4888-9dc2-f78022a18ed6
 {
-java:S1068"3Remove this unused "tweetRepository" private field.(åÌøÃûÿÿÿÿ8ØåĞ…2J$3514af4c-f66d-4276-9828-4aaca8104119
+java:S1068"3Remove this unused "tweetRepository" private field.(åÌøÃûÿÿÿÿ8üö¶…2J$36eba28d-ab89-49fa-ac4d-c569cd692fa6

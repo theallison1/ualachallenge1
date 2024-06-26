@@ -1,5 +1,6 @@
 package com.challenge.uala.controllers;
 
+import com.challenge.uala.mapper.UserMapper;
 import com.challenge.uala.model.DtoUsuarios.UserDTO;
 import com.challenge.uala.model.DtoUsuarios.UserDtoResponse;
 import com.challenge.uala.model.User;
@@ -28,14 +29,14 @@ public class ControllerUsuarios {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDtoResponse> getUsuarioById(@PathVariable Long id) {
-        try {
-            UserDtoResponse usuario = userService.getUserById(id);
-            return ResponseEntity.ok(usuario);
-        } catch (EntityNotFoundException e) {
+    public ResponseEntity<UserDtoResponse> getUserById(@PathVariable Long id) {
+        UserDtoResponse user = userService.getUserById(id);
+        if (user == null) {
             return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.ok(user);
     }
+
 
     @PostMapping("/save")
     public ResponseEntity<UserDtoResponse> saveUser(@Valid @RequestBody UserDTO userDTO) {
@@ -45,20 +46,20 @@ public class ControllerUsuarios {
 
     @PostMapping("/{username}/follow/{userToFollow}")
     public ResponseEntity<Void> followUser(@PathVariable String username, @PathVariable String userToFollow) {
-        LOGGER.info(username,userToFollow);
+        LOGGER.info("Attempting to follow: {} -> {}", username, userToFollow);
         LOGGER.info("-----------------------------------");
 
         User user = userService.findByUsername(username);
         User followUser = userService.findByUsername(userToFollow);
 
         if (user == null || followUser == null) {
+            LOGGER.error("User not found: {} or {}", username, userToFollow);
             return ResponseEntity.notFound().build();
         }
 
         userService.followUser(user, followUser);
         return ResponseEntity.ok().build();
     }
-
 
 
 

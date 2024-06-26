@@ -51,6 +51,6 @@ h
 o
 ?src/main/java/com/challenge/uala/model/DtoUsuarios/UserDTO.java,4/d/4dbe14cc5a11289ca39a9ccc97ce001ee9a750a5
 w
-Gsrc/main/java/com/challenge/uala/model/DtoUsuarios/UserDtoREsponse.java,f/0/f01acc8f39e7a857cc30e74e9990cced5ec419e3
-w
 Gsrc/main/java/com/challenge/uala/model/DtoUsuarios/UserDtoResponse.java,d/1/d136d8877abebef47e18d89fe37d337137333ef9
+g
+7src/main/java/com/challenge/uala/mapper/UserMapper.java,d/d/dda242b5fd77618cb19130ca0ef6dbaf3f93fcc7
