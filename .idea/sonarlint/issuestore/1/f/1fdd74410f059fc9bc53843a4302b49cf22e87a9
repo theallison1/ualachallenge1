@@ -1,5 +1,7 @@
 
 ½
-java:S6204I"zReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()' and ensure that the list is unmodified.(œçÖß8„îóá„2J$f734612e-41b7-48ed-9e75-0987fb39e87e
+java:S6204J"zReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()' and ensure that the list is unmodified.(œçÖß8„îóá„2J$df210ecb-ee05-4cd0-a803-9ef57fd3093f
+\
+java:S1128":Remove this unused import 'com.challenge.uala.model.User'.(‘¿¶ùÿÿÿÿ8ƒ½µ‹…2
 r
-java:S1068"/Remove this unused "tweetMapper" private field.(Æ¼Ê€8 ò‰â„2J$ae96400a-da87-4085-91b2-4252ad5a5670
+java:S1068"/Remove this unused "tweetMapper" private field.(Æ¼Ê€8 ò‰â„2J$9cfaafa1-491b-490e-8269-81e7486ce204

@@ -1,5 +1,6 @@
 package com.challenge.uala.UserServiceTest;
 
+import com.challenge.uala.model.DtoUsuarios.UserDtoResponse;
 import com.challenge.uala.model.User;
 import com.challenge.uala.repos.UserRepository;
 import com.challenge.uala.services.UserServiceImple.UserServiceImpl;
@@ -32,7 +33,7 @@ class UserServiceTest {
 
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
-        User foundUser = userService.getUserById(1L);
+        UserDtoResponse foundUser = userService.getUserById(1L);
         assertNotNull(foundUser);
         assertEquals("user1", foundUser.getUsername());
     }

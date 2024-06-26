@@ -2,6 +2,7 @@ package com.challenge.uala.controllers;
 
 
 import com.challenge.uala.mapper.TweetMapper;
+import com.challenge.uala.model.DtoUsuarios.UserDtoResponse;
 import com.challenge.uala.model.Tweet;
 import com.challenge.uala.model.TweetDto.TweetDTO;
 import com.challenge.uala.model.User;
@@ -38,7 +39,7 @@ public class TweetController {
                                                @RequestBody TweetDTO tweetDTO) {
 
         Long userId = UserIdentifierExtractor.extractUserId(headerUserId, paramUserId, tweetDTO != null ? tweetDTO.getUserId() : null);
-        Optional<User> userOpt = Optional.ofNullable(userService.getUserById(userId));
+        Optional<UserDtoResponse> userOpt = Optional.ofNullable(userService.getUserById(userId));
 
         if (userOpt.isPresent()) {
 
@@ -59,7 +60,7 @@ public class TweetController {
     public ResponseEntity<List<TweetDTO>> getTimeline(@RequestHeader(value = "userId", required = false) Long headerUserId,
                                                       @RequestParam(value = "userId", required = false) Long paramUserId) {
         Long userId = UserIdentifierExtractor.extractUserId(headerUserId, paramUserId, null);
-        Optional<User> userOpt = Optional.ofNullable(userService.getUserById(userId));
+        Optional<UserDtoResponse> userOpt = Optional.ofNullable(userService.getUserById(userId));
 
         if (userOpt.isPresent()) {
             List<Tweet> timeline = tweetService.getTimeline(userOpt.get().getId());

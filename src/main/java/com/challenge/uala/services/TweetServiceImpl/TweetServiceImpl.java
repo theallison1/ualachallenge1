@@ -1,5 +1,6 @@
 package com.challenge.uala.services.TweetServiceImpl;
 
+import com.challenge.uala.model.DtoUsuarios.UserDtoResponse;
 import com.challenge.uala.model.Tweet;
 import com.challenge.uala.model.TweetDto.TweetDTO;
 import com.challenge.uala.model.User;
@@ -42,8 +43,8 @@ public class TweetServiceImpl implements TweetService {
         return tweetRepository.findByUserId(userId);
     }
     public List<Tweet> getTimelineForUser(Long userId) {
-        User user = userService.getUserById(userId);
-        List<User> following = userService.getUsersFollowedByUser(userId);
+        UserDtoResponse user = userService.getUserById(userId);
+        List<UserDtoResponse> following = userService.getUsersFollowedByUser(userId);
         following.add(user); // Incluye los propios tweets del usuario
 
         return tweetRepository.findByUserInOrderByCreatedAtDesc(new ArrayList<>(following));

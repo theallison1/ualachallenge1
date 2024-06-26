@@ -1,12 +1,13 @@
 package com.challenge.uala.controllers;
 
 import com.challenge.uala.model.DtoUsuarios.UserDTO;
+import com.challenge.uala.model.DtoUsuarios.UserDtoResponse;
 import com.challenge.uala.model.User;
 import com.challenge.uala.services.UserService.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +17,8 @@ import java.util.Optional;
 @RequestMapping("/usuarios")
 public class ControllerUsuarios {
 
-    @Autowired
     private final UserService userService;
-    private static final Logger LOGGER = LogManager.getLogger(UserService.class);
+    private static final Logger LOGGER = LogManager.getLogger(ControllerUsuarios.class);
 
 
     public ControllerUsuarios(UserService userService) {
@@ -28,13 +28,18 @@ public class ControllerUsuarios {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUsuarioById(@PathVariable Long id) {
-        Optional<User> usuario = Optional.ofNullable(userService.getUserById(id));
-        return usuario.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<UserDtoResponse> getUsuarioById(@PathVariable Long id) {
+        try {
+            UserDtoResponse usuario = userService.getUserById(id);
+            return ResponseEntity.ok(usuario);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
+
     @PostMapping("/save")
-    public ResponseEntity<User> saveUser(@Valid @RequestBody UserDTO userDTO) {
-        User savedUser = userService.saveUser(userDTO);
+    public ResponseEntity<UserDtoResponse> saveUser(@Valid @RequestBody UserDTO userDTO) {
+        UserDtoResponse savedUser = userService.saveUser(userDTO);
         return ResponseEntity.ok(savedUser);
     }
 

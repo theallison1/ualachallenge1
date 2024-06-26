@@ -48,3 +48,9 @@ m
 =src/main/java/com/challenge/uala/model/TweetDto/TweetDTO.java,a/5/a567c032624ca4b5ae74ca93dd382e81e4853cff
 h
 8src/main/java/com/challenge/uala/mapper/TweetMapper.java,b/e/be24d6af44612b055a8eae38df308998c621e5a8
+o
+?src/main/java/com/challenge/uala/model/DtoUsuarios/UserDTO.java,4/d/4dbe14cc5a11289ca39a9ccc97ce001ee9a750a5
+w
+Gsrc/main/java/com/challenge/uala/model/DtoUsuarios/UserDtoREsponse.java,f/0/f01acc8f39e7a857cc30e74e9990cced5ec419e3
+w
+Gsrc/main/java/com/challenge/uala/model/DtoUsuarios/UserDtoResponse.java,d/1/d136d8877abebef47e18d89fe37d337137333ef9
