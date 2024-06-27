@@ -1,69 +1,107 @@
 package com.challenge.uala.TweetControllerTest;
 
 
-import com.challenge.uala.model.Tweet;
-import com.challenge.uala.services.TweetService.TweetService;
 import com.challenge.uala.controllers.TweetController;
+import com.challenge.uala.mapper.TweetMapper;
+import com.challenge.uala.model.DtoUsuarios.UserDtoResponse;
+import com.challenge.uala.model.Tweet;
+import com.challenge.uala.model.TweetDto.TweetDTO;
+import com.challenge.uala.model.User;
+import com.challenge.uala.services.TweetService.TweetService;
+import com.challenge.uala.services.UserService.UserService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
-import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
-import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @ExtendWith(MockitoExtension.class)
-public class TweetControllerTest {
+class TweetControllerTest {
 
     @Mock
     private TweetService tweetService;
 
+    @Mock
+    private UserService userService;
+
+    @Mock
+    private TweetMapper tweetMapper;
+
     @InjectMocks
     private TweetController tweetController;
-//
-//    @Test
-//    void testPostTweet() throws Exception {
-//        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(tweetController).build();
-//
-//        Tweet tweet = new Tweet();
-//        tweet.setId(1L);
-//        tweet.setContent("Hello World");
-//        tweet.setCreatedAt(LocalDateTime.now());
-//
-//        when(tweetService.postTweet(any(Tweet.class))).thenReturn(tweet);
-//
-//        mockMvc.perform(post("/tweets")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content("{\"content\": \"Hello World\"}"))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.content", is("Hello World")));
-//    }
+
+    private UserDtoResponse userDtoResponse;
+    private Tweet tweet;
+    private TweetDTO tweetDTO;
+
+    @BeforeEach
+    void setUp() {
+        userDtoResponse = new UserDtoResponse();
+        userDtoResponse.setId(1L);
+        userDtoResponse.setUsername("user1");
+
+        tweet = new Tweet();
+        tweet.setId(1L);
+        tweet.setContent("Test tweet");
+        tweet.setUser(new User());
+
+        tweetDTO = new TweetDTO();
+        tweetDTO.setUserId(1L);
+        tweetDTO.setContent("Test tweet");
+    }
 
     @Test
-    void testGetTimeline() throws Exception {
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(tweetController).build();
+    void testPostTweet() {
+        when(userService.getUserById(1L)).thenReturn(userDtoResponse);
+        when(tweetService.postTweet(any(TweetDTO.class))).thenReturn(tweet);
 
-        Tweet tweet = new Tweet();
-        tweet.setId(1L);
-        tweet.setContent("Tweet 1");
-        tweet.setCreatedAt(LocalDateTime.now());
+        ResponseEntity<Tweet> response = tweetController.postTweet(1L, null, tweetDTO);
 
-        when(tweetService.getTimeline(1L)).thenReturn(List.of(tweet));
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals("Test tweet", response.getBody().getContent());
+    }
 
-        mockMvc.perform(get("/tweets/timeline/1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].content", is("Tweet 1")));
+    @Test
+    void testPostTweet_UserNotFound() {
+        when(userService.getUserById(1L)).thenReturn(null);
+
+        ResponseEntity<Tweet> response = tweetController.postTweet(1L, null, tweetDTO);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    void testGetTimeline() {
+        when(userService.getUserById(1L)).thenReturn(userDtoResponse);
+        when(tweetService.getTimeline(1L)).thenReturn(Collections.singletonList(tweet));
+
+        ResponseEntity<List<TweetDTO>> response = tweetController.getTimeline(1L, null);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(1, response.getBody().size());
+        assertEquals("Test tweet", response.getBody().get(0).getContent());
+    }
+
+    @Test
+    void testGetTimeline_UserNotFound() {
+        when(userService.getUserById(1L)).thenReturn(null);
+
+        ResponseEntity<List<TweetDTO>> response = tweetController.getTimeline(1L, null);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 }

@@ -1,0 +1,16 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+uala,com.challenge.uala.controllers,TweetController,1,112,1,5,0,28,1,6,0,4
+uala,com.challenge.uala.controllers,ControllerUsuarios,59,10,6,0,15,4,6,2,3,2
+uala,com.challenge.uala.exception,UserNotFoundException,5,0,0,0,2,0,1,0,1,0
+uala,com.challenge.uala.exception,GlobalExceptionHandler,7,3,0,0,1,1,1,1,1,1
+uala,com.challenge.uala.model,User,47,46,13,1,6,16,9,10,2,10
+uala,com.challenge.uala.model,Tweet,8,27,0,0,4,11,2,8,2,8
+uala,com.challenge.uala.services.UserServiceImple,UserServiceImpl,141,156,11,7,29,41,11,10,3,9
+uala,com.challenge.uala.services.TweetServiceImpl,TweetServiceImpl,0,66,0,0,0,13,0,5,0,5
+uala,com.challenge.uala.model.TweetDto,TweetDTO,3,21,0,0,1,9,1,6,1,6
+uala,com.challenge.uala.util,UserIdentifierExtractor,9,4,3,1,4,2,3,1,1,1
+uala,com.challenge.uala.model.DtoUsuarios,UserDtoResponse,6,32,0,0,2,15,2,9,2,9
+uala,com.challenge.uala.model.DtoUsuarios,UserDTO,0,10,0,0,0,4,0,3,0,3
+uala,com.challenge.uala,UalaApplication,5,3,0,0,2,1,1,1,1,1
+uala,com.challenge.uala.mapper,UserMapper,76,0,6,0,24,0,6,0,3,0
+uala,com.challenge.uala.mapper,TweetMapper,0,3,0,0,0,1,0,1,0,1

@@ -3,10 +3,7 @@
 
     import jakarta.persistence.*;
     import jakarta.validation.constraints.NotNull;
-    import lombok.AllArgsConstructor;
-    import lombok.Builder;
-    import lombok.Data;
-    import lombok.NoArgsConstructor;
+    import lombok.*;
 
     import java.util.HashSet;
     import java.util.List;
@@ -14,7 +11,8 @@
     import java.util.Set;
 
 
-    @Data
+    @Getter
+    @Setter
     @Entity
     @NoArgsConstructor
     @AllArgsConstructor
@@ -44,15 +42,6 @@
         @ManyToMany(mappedBy = "followers")
         private Set<User> following = new HashSet<>();
 
-        public void addFollower(User follower) {
-            followers.add(follower);
-            follower.getFollowing().add(this);
-        }
-
-        public void removeFollower(User follower) {
-            followers.remove(follower);
-            follower.getFollowing().remove(this);
-        }
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
@@ -61,5 +50,43 @@
             return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(tweets, user.tweets) && Objects.equals(followers, user.followers);
         }
 
+        public Long getId() {
+            return id;
+        }
 
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public @NotNull String getUsername() {
+            return username;
+        }
+
+        public void setUsername(@NotNull String username) {
+            this.username = username;
+        }
+
+        public List<Tweet> getTweets() {
+            return tweets;
+        }
+
+        public void setTweets(List<Tweet> tweets) {
+            this.tweets = tweets;
+        }
+
+        public Set<User> getFollowers() {
+            return followers;
+        }
+
+        public void setFollowers(Set<User> followers) {
+            this.followers = followers;
+        }
+
+        public Set<User> getFollowing() {
+            return following;
+        }
+
+        public void setFollowing(Set<User> following) {
+            this.following = following;
+        }
     }

@@ -5,7 +5,6 @@ import com.challenge.uala.mapper.TweetMapper;
 import com.challenge.uala.model.DtoUsuarios.UserDtoResponse;
 import com.challenge.uala.model.Tweet;
 import com.challenge.uala.model.TweetDto.TweetDTO;
-import com.challenge.uala.model.User;
 import com.challenge.uala.services.TweetService.TweetService;
 import com.challenge.uala.services.UserService.UserService;
 import com.challenge.uala.util.UserIdentifierExtractor;

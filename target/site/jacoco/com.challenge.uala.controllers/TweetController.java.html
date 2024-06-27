@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TweetController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">uala</a> &gt; <a href="index.source.html" class="el_package">com.challenge.uala.controllers</a> &gt; <span class="el_source">TweetController.java</span></div><h1>TweetController.java</h1><pre class="source lang-java linenums">package com.challenge.uala.controllers;
+
+
+import com.challenge.uala.mapper.TweetMapper;
+import com.challenge.uala.model.DtoUsuarios.UserDtoResponse;
+import com.challenge.uala.model.Tweet;
+import com.challenge.uala.model.TweetDto.TweetDTO;
+import com.challenge.uala.services.TweetService.TweetService;
+import com.challenge.uala.services.UserService.UserService;
+import com.challenge.uala.util.UserIdentifierExtractor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@RestController
+@RequestMapping(&quot;/tweets&quot;)
+
+public class TweetController {
+    private TweetService tweetService;
+    private UserService userService;
+    private final TweetMapper tweetMapper;
+
+    @Autowired
+<span class="fc" id="L28">    public TweetController(TweetService tweetService, UserService userService, TweetMapper tweetMapper) {</span>
+<span class="fc" id="L29">        this.tweetService = tweetService;</span>
+<span class="fc" id="L30">        this.userService = userService;</span>
+<span class="fc" id="L31">        this.tweetMapper = tweetMapper;</span>
+<span class="fc" id="L32">    }</span>
+
+
+    @PostMapping
+        public ResponseEntity&lt;Tweet&gt; postTweet(@RequestHeader(value = &quot;userId&quot;, required = false) Long headerUserId,
+                                               @RequestParam(value = &quot;userId&quot;, required = false) Long paramUserId,
+                                               @RequestBody TweetDTO tweetDTO) {
+
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        Long userId = UserIdentifierExtractor.extractUserId(headerUserId, paramUserId, tweetDTO != null ? tweetDTO.getUserId() : null);</span>
+<span class="fc" id="L41">        Optional&lt;UserDtoResponse&gt; userOpt = Optional.ofNullable(userService.getUserById(userId));</span>
+
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if (userOpt.isPresent()) {</span>
+
+
+<span class="fc" id="L46">            Tweet createdTweet = tweetService.postTweet(tweetDTO);</span>
+
+<span class="fc" id="L48">            Tweet tweet = new Tweet();</span>
+<span class="fc" id="L49">            tweet.setContent(createdTweet.getContent());</span>
+<span class="fc" id="L50">            tweet.setUser(createdTweet.getUser());</span>
+
+<span class="fc" id="L52">            return ResponseEntity.ok(tweet);</span>
+        }
+<span class="fc" id="L54">        return ResponseEntity.notFound().build();</span>
+    }
+
+
+    @GetMapping(&quot;/timeline&quot;)
+    public ResponseEntity&lt;List&lt;TweetDTO&gt;&gt; getTimeline(@RequestHeader(value = &quot;userId&quot;, required = false) Long headerUserId,
+                                                      @RequestParam(value = &quot;userId&quot;, required = false) Long paramUserId) {
+<span class="fc" id="L61">        Long userId = UserIdentifierExtractor.extractUserId(headerUserId, paramUserId, null);</span>
+<span class="fc" id="L62">        Optional&lt;UserDtoResponse&gt; userOpt = Optional.ofNullable(userService.getUserById(userId));</span>
+
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (userOpt.isPresent()) {</span>
+<span class="fc" id="L65">            List&lt;Tweet&gt; timeline = tweetService.getTimeline(userOpt.get().getId());</span>
+<span class="fc" id="L66">            List&lt;TweetDTO&gt; timelineDTO = timeline.stream().map(tweet -&gt; {</span>
+<span class="fc" id="L67">                TweetDTO dto = new TweetDTO();</span>
+<span class="fc" id="L68">                dto.setUserId(tweet.getId());</span>
+<span class="fc" id="L69">                dto.setContent(tweet.getContent());</span>
+<span class="fc" id="L70">                dto.setCreatedAt(tweet.getCreatedAt());</span>
+<span class="fc" id="L71">                dto.setUserId(tweet.getUser().getId());</span>
+<span class="fc" id="L72">                return dto;</span>
+<span class="fc" id="L73">            }).collect(Collectors.toList());</span>
+
+<span class="fc" id="L75">            return ResponseEntity.ok(timelineDTO);</span>
+        }
+<span class="fc" id="L77">        return ResponseEntity.notFound().build();</span>
+
+    }
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

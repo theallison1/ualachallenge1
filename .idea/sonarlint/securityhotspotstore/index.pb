@@ -40,8 +40,6 @@ B
 :
 
 nginx.conf,e/d/ed8b45da44d73de79bd7c1c203a419d6ee7d6fde
->
-Dockerfile-app,5/a/5a3dad35b45a1093ead12e80dd6d39398ef97c62
 r
 Bsrc/main/java/com/challenge/uala/util/UserIdentifierExtractor.java,7/d/7d9a8da8426e39e7cbad6553b73efd1fa4ea1c47
 m
@@ -54,3 +52,6 @@ w
 Gsrc/main/java/com/challenge/uala/model/DtoUsuarios/UserDtoResponse.java,d/1/d136d8877abebef47e18d89fe37d337137333ef9
 g
 7src/main/java/com/challenge/uala/mapper/UserMapper.java,d/d/dda242b5fd77618cb19130ca0ef6dbaf3f93fcc7
+:
+
+Dockerfile,6/6/6651ddff6eb82c840ced7c1dddee15c6e1913dd4

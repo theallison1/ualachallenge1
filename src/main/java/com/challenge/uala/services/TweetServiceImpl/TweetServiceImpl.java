@@ -12,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-
 @Service
 public class TweetServiceImpl implements TweetService {
 
@@ -23,6 +21,7 @@ public class TweetServiceImpl implements TweetService {
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private UserService userService;
 
@@ -36,18 +35,17 @@ public class TweetServiceImpl implements TweetService {
 
         tweet1 = tweetRepository.save(tweet1);
         return tweet1;
-
     }
 
     public List<Tweet> getTimeline(Long userId) {
         return tweetRepository.findByUserId(userId);
     }
+
     public List<Tweet> getTimelineForUser(Long userId) {
         UserDtoResponse user = userService.getUserById(userId);
-        List<UserDtoResponse> following = userService.getUsersFollowedByUser(userId);
+        List<UserDtoResponse> following = new ArrayList<>(userService.getUsersFollowedByUser(userId));
         following.add(user); // Incluye los propios tweets del usuario
 
         return tweetRepository.findByUserInOrderByCreatedAtDesc(new ArrayList<>(following));
-
     }
 }

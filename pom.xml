@@ -60,7 +60,6 @@
             <version>7.0.1.Final</version>
         </dependency>
 
-
         <!-- Dependencia de Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -73,19 +72,27 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.7.0</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>4.5.1</version>
+            <version>4.5.1</version> <!-- Versión de Mockito compatible con Spring Boot 3.3.1 -->
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -98,8 +105,6 @@
             <version>4.0.1</version> <!-- Versión más reciente de Servlet API -->
             <scope>provided</scope>
         </dependency>
-
-
     </dependencies>
 
     <!-- Configuración del plugin de compilación de Maven y Jacoco -->
@@ -108,7 +113,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.3.1</version> <!-- Ajusta la versión según la versión de Spring Boot que estés utilizando -->
+                <version>3.1.0</version> <!-- Ajusta la versión según la versión de Spring Boot que estés utilizando -->
                 <executions>
                     <execution>
                         <goals>

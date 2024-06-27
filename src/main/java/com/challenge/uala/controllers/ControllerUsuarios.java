@@ -1,18 +1,17 @@
 package com.challenge.uala.controllers;
 
-import com.challenge.uala.mapper.UserMapper;
+
 import com.challenge.uala.model.DtoUsuarios.UserDTO;
 import com.challenge.uala.model.DtoUsuarios.UserDtoResponse;
 import com.challenge.uala.model.User;
 import com.challenge.uala.services.UserService.UserService;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/usuarios")

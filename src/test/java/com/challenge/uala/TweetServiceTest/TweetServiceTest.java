@@ -1,27 +1,30 @@
 package com.challenge.uala.TweetServiceTest;
 
+import com.challenge.uala.model.DtoUsuarios.UserDtoResponse;
 import com.challenge.uala.model.Tweet;
+import com.challenge.uala.model.TweetDto.TweetDTO;
 import com.challenge.uala.model.User;
 import com.challenge.uala.repos.TweetRepository;
 import com.challenge.uala.repos.UserRepository;
-import com.challenge.uala.services.TweetService.TweetService;
+import com.challenge.uala.services.TweetServiceImpl.TweetServiceImpl;
+import com.challenge.uala.services.UserService.UserService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class TweetServiceTest {
+class TweetServiceImplTest {
 
     @Mock
     private TweetRepository tweetRepository;
@@ -29,47 +32,79 @@ public class TweetServiceTest {
     @Mock
     private UserRepository userRepository;
 
-    @InjectMocks
-    private TweetService tweetService;
+    @Mock
+    private UserService userService;
 
-//    @Test
-//    void testPostTweet() {
-//        Tweet tweet = new Tweet();
-//        tweet.setId(1L);
-//        tweet.setContent("Hello World");
-//        tweet.setCreatedAt(LocalDateTime.now());
-//
-//        when(tweetRepository.save(tweet)).thenReturn(tweet);
-//
-//        Tweet postedTweet = tweetService.postTweet(tweet);
-//        assertNotNull(postedTweet);
-//        assertEquals("Hello World", postedTweet.getContent());
-//    }
+    @InjectMocks
+    private TweetServiceImpl tweetServiceImpl;
+
+    private TweetDTO tweetDTO;
+    private Tweet tweet;
+    private User user;
+    private UserDtoResponse userDtoResponse;
+
+    @BeforeEach
+    void setUp() {
+        tweetDTO = new TweetDTO();
+        tweetDTO.setUserId(1L);
+        tweetDTO.setContent("Test tweet");
+
+        user = new User();
+        user.setId(1L);
+        user.setUsername("user1");
+
+        tweet = new Tweet();
+        tweet.setId(1L);
+        tweet.setContent("Test tweet");
+        tweet.setUser(user);
+
+        userDtoResponse = new UserDtoResponse();
+        userDtoResponse.setId(1L);
+        userDtoResponse.setUsername("user1");
+    }
+
+    @Test
+    void testPostTweet() {
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+        when(tweetRepository.save(any(Tweet.class))).thenReturn(tweet);
+
+        Tweet result = tweetServiceImpl.postTweet(tweetDTO);
+
+        assertNotNull(result);
+        assertEquals("Test tweet", result.getContent());
+        assertEquals(user, result.getUser());
+    }
+
+    @Test
+    void testPostTweet_UserNotFound() {
+        when(userRepository.findById(1L)).thenReturn(Optional.empty());
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> tweetServiceImpl.postTweet(tweetDTO));
+
+        assertEquals("Usuario no encontrado", exception.getMessage());
+    }
 
     @Test
     void testGetTimeline() {
-        User user1 = new User();
-        user1.setId(1L);
-        user1.setUsername("user1");
+        when(tweetRepository.findByUserId(1L)).thenReturn(Collections.singletonList(tweet));
 
-        User user2 = new User();
-        user2.setId(2L);
-        user2.setUsername("user2");
+        List<Tweet> timeline = tweetServiceImpl.getTimeline(1L);
 
-        user1.setFollowers(Set.of(user2));
-
-        Tweet tweet1 = new Tweet();
-        tweet1.setId(1L);
-        tweet1.setContent("Tweet 1");
-        tweet1.setUser(user2);
-        tweet1.setCreatedAt(LocalDateTime.now());
-
-        when(userRepository.findById(1L)).thenReturn(Optional.of(user1));
-        when(tweetRepository.findByUserInOrderByCreatedAtDesc(List.of(user2))).thenReturn(List.of(tweet1));
-
-        List<Tweet> timeline = tweetService.getTimeline(1L);
         assertNotNull(timeline);
         assertEquals(1, timeline.size());
-        assertEquals("Tweet 1", timeline.get(0).getContent());
+        assertEquals("Test tweet", timeline.get(0).getContent());
+    }
+
+    @Test
+    void testGetTimelineForUser() {
+        when(userService.getUserById(1L)).thenReturn(userDtoResponse);
+        when(userService.getUsersFollowedByUser(1L)).thenReturn(Collections.singletonList(userDtoResponse));
+        when(tweetRepository.findByUserInOrderByCreatedAtDesc(any(List.class))).thenReturn(Collections.singletonList(tweet));
+
+        List<Tweet> timeline = tweetServiceImpl.getTimelineForUser(1L);
+
+        assertNotNull(timeline);
+        assertEquals(1, timeline.size());
+        assertEquals("Test tweet", timeline.get(0).getContent());
     }
 }
