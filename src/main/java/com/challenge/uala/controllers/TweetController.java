@@ -8,6 +8,7 @@ import com.challenge.uala.model.TweetDto.TweetDTO;
 import com.challenge.uala.services.TweetService.TweetService;
 import com.challenge.uala.services.UserService.UserService;
 import com.challenge.uala.util.UserIdentifierExtractor;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class TweetController {
     @PostMapping
         public ResponseEntity<Tweet> postTweet(@RequestHeader(value = "userId", required = false) Long headerUserId,
                                                @RequestParam(value = "userId", required = false) Long paramUserId,
-                                               @RequestBody TweetDTO tweetDTO) {
+                                               @Valid @RequestBody TweetDTO tweetDTO) {
 
         Long userId = UserIdentifierExtractor.extractUserId(headerUserId, paramUserId, tweetDTO != null ? tweetDTO.getUserId() : null);
         Optional<UserDtoResponse> userOpt = Optional.ofNullable(userService.getUserById(userId));
