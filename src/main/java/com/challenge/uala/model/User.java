@@ -19,7 +19,7 @@
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    @Table(name = "tbl_user")
+    @Table(name = "tbl_user", indexes = @Index(name = "idx_username", columnList = "username"))
     public class User {
 
         @Id

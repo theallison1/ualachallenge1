@@ -1,16 +1,16 @@
 
-	java:S112L"FDefine and throw a dedicated exception instead of using a generic one.(ÅÙÍĞúÿÿÿÿ8Â‚Ä·…2J$4682404d-9bed-477e-a773-9bd3bea690e4
-g	java:S112O"FDefine and throw a dedicated exception instead of using a generic one.(³ï‚¯øÿÿÿÿ8ÿíÎ·…2
-g	java:S112_"FDefine and throw a dedicated exception instead of using a generic one.(¡·™âûÿÿÿÿ8ÿíÎ·…2
-z
-java:S2139F"XEither log this exception and handle it, or rethrow it with some contextual information.(å½³öşÿÿÿÿ8¡îÎ·…2
-z
-java:S2139J"XEither log this exception and handle it, or rethrow it with some contextual information.(Ï¤¦úÿÿÿÿ8¤îÎ·…2
-u
-java:S2139M"XEither log this exception and handle it, or rethrow it with some contextual information.(”ı¾8§îÎ·…2
+	java:S112M"FDefine and throw a dedicated exception instead of using a generic one.(ÅÙÍĞúÿÿÿÿ8¬ï„¹…2J$5b575368-7d30-4f40-8d87-0f310465a630
+	java:S112P"FDefine and throw a dedicated exception instead of using a generic one.(³ï‚¯øÿÿÿÿ8®ï„¹…2J$6c98d81b-1094-40ac-ac23-0ddb4bd62ae5
+	java:S112`"FDefine and throw a dedicated exception instead of using a generic one.(¡·™âûÿÿÿÿ8¯ï„¹…2J$7740ca2c-adca-45e0-8be7-9c5c6574e869
+ 
+java:S2139G"XEither log this exception and handle it, or rethrow it with some contextual information.(å½³öşÿÿÿÿ8íï„¹…2J$227f2327-ba50-4428-ae31-88825bcc684e
+ 
+java:S2139K"XEither log this exception and handle it, or rethrow it with some contextual information.(Ï¤¦úÿÿÿÿ8ôï„¹…2J$8619fbb4-4f71-4d6f-bfdc-296d253100ba
+›
+java:S2139N"XEither log this exception and handle it, or rethrow it with some contextual information.(”ı¾8úï„¹…2J$623b1aff-1573-4c30-811b-de1637416de5
 
-java:S6809X"UCall transactional methods via an injected dependency instead of directly via 'this'.(†Ö¼„ùÿÿÿÿ8ÕæÉ·…2J$82e83b0b-0ce1-40e4-9ddb-e15c5e909269
+java:S6809Y"UCall transactional methods via an injected dependency instead of directly via 'this'.(†Ö¼„ùÿÿÿÿ8ğ„¹…2J$dc4e8b38-0d6e-4ecd-a7aa-a0d14fd58d6d
 ½
-java:S6204]"zReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()' and ensure that the list is unmodified.(ª™¨¹8Ú‚Ä·…2J$fb86cd27-8928-4ae7-9a61-8631aedd5f44
+java:S6204^"zReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()' and ensure that the list is unmodified.(ª™¨¹8„ğ„¹…2J$3b869bc4-2354-4869-b8de-1b7b835fef52
 —
-java:S6809\"UCall transactional methods via an injected dependency instead of directly via 'this'.(ÚÊ%8Ü‚Ä·…2J$4e4ae473-8ce1-454d-8041-48200496fd5d
+java:S6809]"UCall transactional methods via an injected dependency instead of directly via 'this'.(ÚÊ%8†ğ„¹…2J$cbe34d8e-cad8-4fe1-9a84-7b76f0e5377b

@@ -13,6 +13,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -100,18 +101,31 @@ public class UserServiceImpl implements UserService {
         UserDtoResponse dto = new UserDtoResponse();
         dto.setId(user.getId());
         dto.setUsername(user.getUsername());
-        dto.setTweetIds(user.getTweets().stream()
-                .map(Tweet::getId)
-                .collect(Collectors.toSet()));
-        dto.setFollowers(user.getFollowers().stream()
-                .map(this::mapFollowerToDto)
-                .collect(Collectors.toSet()));
-        dto.setFollowerIds(user.getFollowers().stream()
-                .map(User::getId)
-                .collect(Collectors.toSet()));
+
+        // Verificar si user.getTweets() es nulo o vacío antes de mapear los IDs de tweets
+        if (user.getTweets() != null && !user.getTweets().isEmpty()) {
+            dto.setTweetIds(user.getTweets().stream()
+                    .map(Tweet::getId)
+                    .collect(Collectors.toSet()));
+        } else {
+            dto.setTweetIds(Collections.emptySet());  // o null, dependiendo de cómo manejes el vacío
+        }
+
+        // Verificar si user.getFollowers() es nulo o vacío antes de mapear los seguidores
+        if (user.getFollowers() != null && !user.getFollowers().isEmpty()) {
+            dto.setFollowers(user.getFollowers().stream()
+                    .map(this::mapFollowerToDto)
+                    .collect(Collectors.toSet()));
+            dto.setFollowerIds(user.getFollowers().stream()
+                    .map(User::getId)
+                    .collect(Collectors.toSet()));
+        } else {
+            dto.setFollowers(Collections.emptySet());  // o null, dependiendo de cómo manejes el vacío
+            dto.setFollowerIds(Collections.emptySet());  // o null, dependiendo de cómo manejes el vacío
+        }
+
         return dto;
     }
-
     private UserDtoResponse mapFollowerToDto(User follower) {
         UserDtoResponse followerDto = new UserDtoResponse();
         followerDto.setId(follower.getId());
