@@ -130,12 +130,26 @@ public class UserServiceImpl implements UserService {
         UserDtoResponse followerDto = new UserDtoResponse();
         followerDto.setId(follower.getId());
         followerDto.setUsername(follower.getUsername());
-        followerDto.setTweetIds(follower.getTweets().stream()
-                .map(Tweet::getId)
-                .collect(Collectors.toSet()));
-        followerDto.setFollowerIds(follower.getFollowers().stream()
-                .map(User::getId)
-                .collect(Collectors.toSet()));
+
+        // Verificar si follower.getTweets() es nulo o vacío antes de mapear los IDs de tweets
+        if (follower.getTweets() != null && !follower.getTweets().isEmpty()) {
+            followerDto.setTweetIds(follower.getTweets().stream()
+                    .map(Tweet::getId)
+                    .collect(Collectors.toSet()));
+        } else {
+            followerDto.setTweetIds(Collections.emptySet());  // o null, dependiendo de cómo manejes el vacío
+        }
+
+        // Verificar si follower.getFollowers() es nulo o vacío antes de mapear los followerIds
+        if (follower.getFollowers() != null && !follower.getFollowers().isEmpty()) {
+            followerDto.setFollowerIds(follower.getFollowers().stream()
+                    .map(User::getId)
+                    .collect(Collectors.toSet()));
+        } else {
+            followerDto.setFollowerIds(Collections.emptySet());  // o null, dependiendo de cómo manejes el vacío
+        }
+
         return followerDto;
     }
+
 }

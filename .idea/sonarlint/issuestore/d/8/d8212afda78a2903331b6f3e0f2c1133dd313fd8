@@ -1,16 +1,16 @@
 
-	java:S112M"FDefine and throw a dedicated exception instead of using a generic one.(ÅÙÍĞúÿÿÿÿ8¬ï„¹…2J$5b575368-7d30-4f40-8d87-0f310465a630
-	java:S112P"FDefine and throw a dedicated exception instead of using a generic one.(³ï‚¯øÿÿÿÿ8®ï„¹…2J$6c98d81b-1094-40ac-ac23-0ddb4bd62ae5
-	java:S112`"FDefine and throw a dedicated exception instead of using a generic one.(¡·™âûÿÿÿÿ8¯ï„¹…2J$7740ca2c-adca-45e0-8be7-9c5c6574e869
+	java:S112M"FDefine and throw a dedicated exception instead of using a generic one.(ÅÙÍĞúÿÿÿÿ8¬ï„¹…2J$f74dbe42-3161-499a-8f19-7df02177a165
+	java:S112P"FDefine and throw a dedicated exception instead of using a generic one.(³ï‚¯øÿÿÿÿ8®ï„¹…2J$3015e7b5-c682-4ec2-ad4f-2c84abdd23e5
+	java:S112`"FDefine and throw a dedicated exception instead of using a generic one.(¡·™âûÿÿÿÿ8¯ï„¹…2J$a4e0fea8-87eb-4277-b6ad-9988aefb3394
  
-java:S2139G"XEither log this exception and handle it, or rethrow it with some contextual information.(å½³öşÿÿÿÿ8íï„¹…2J$227f2327-ba50-4428-ae31-88825bcc684e
+java:S2139G"XEither log this exception and handle it, or rethrow it with some contextual information.(å½³öşÿÿÿÿ8íï„¹…2J$d1481a25-be7b-4b05-8d60-b0f00e64838f
  
-java:S2139K"XEither log this exception and handle it, or rethrow it with some contextual information.(Ï¤¦úÿÿÿÿ8ôï„¹…2J$8619fbb4-4f71-4d6f-bfdc-296d253100ba
+java:S2139K"XEither log this exception and handle it, or rethrow it with some contextual information.(Ï¤¦úÿÿÿÿ8ôï„¹…2J$3ad40c18-3c0f-4a79-9430-051d282032cd
 ›
-java:S2139N"XEither log this exception and handle it, or rethrow it with some contextual information.(”ı¾8úï„¹…2J$623b1aff-1573-4c30-811b-de1637416de5
+java:S2139N"XEither log this exception and handle it, or rethrow it with some contextual information.(”ı¾8úï„¹…2J$f4e24b7b-573e-4d06-b182-5a3d27da16a6
 
-java:S6809Y"UCall transactional methods via an injected dependency instead of directly via 'this'.(†Ö¼„ùÿÿÿÿ8ğ„¹…2J$dc4e8b38-0d6e-4ecd-a7aa-a0d14fd58d6d
+java:S6809Y"UCall transactional methods via an injected dependency instead of directly via 'this'.(†Ö¼„ùÿÿÿÿ8ğ„¹…2J$16c5f0cf-3860-48bc-9ae4-726cb62e7470
 ½
-java:S6204^"zReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()' and ensure that the list is unmodified.(ª™¨¹8„ğ„¹…2J$3b869bc4-2354-4869-b8de-1b7b835fef52
+java:S6204^"zReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()' and ensure that the list is unmodified.(ª™¨¹8„ğ„¹…2J$383ac313-64ff-4f4c-a72e-5f657d4eeea7
 —
-java:S6809]"UCall transactional methods via an injected dependency instead of directly via 'this'.(ÚÊ%8†ğ„¹…2J$cbe34d8e-cad8-4fe1-9a84-7b76f0e5377b
+java:S6809]"UCall transactional methods via an injected dependency instead of directly via 'this'.(ÚÊ%8†ğ„¹…2J$f1674e18-f263-410b-9b91-977e6adacfe9
