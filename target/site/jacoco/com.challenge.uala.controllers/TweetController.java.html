@@ -8,6 +8,7 @@ import com.challenge.uala.model.TweetDto.TweetDTO;
 import com.challenge.uala.services.TweetService.TweetService;
 import com.challenge.uala.services.UserService.UserService;
 import com.challenge.uala.util.UserIdentifierExtractor;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,56 +26,56 @@ public class TweetController {
     private final TweetMapper tweetMapper;
 
     @Autowired
-<span class="fc" id="L28">    public TweetController(TweetService tweetService, UserService userService, TweetMapper tweetMapper) {</span>
-<span class="fc" id="L29">        this.tweetService = tweetService;</span>
-<span class="fc" id="L30">        this.userService = userService;</span>
-<span class="fc" id="L31">        this.tweetMapper = tweetMapper;</span>
-<span class="fc" id="L32">    }</span>
+<span class="fc" id="L29">    public TweetController(TweetService tweetService, UserService userService, TweetMapper tweetMapper) {</span>
+<span class="fc" id="L30">        this.tweetService = tweetService;</span>
+<span class="fc" id="L31">        this.userService = userService;</span>
+<span class="fc" id="L32">        this.tweetMapper = tweetMapper;</span>
+<span class="fc" id="L33">    }</span>
 
 
     @PostMapping
         public ResponseEntity&lt;Tweet&gt; postTweet(@RequestHeader(value = &quot;userId&quot;, required = false) Long headerUserId,
                                                @RequestParam(value = &quot;userId&quot;, required = false) Long paramUserId,
-                                               @RequestBody TweetDTO tweetDTO) {
+                                               @Valid @RequestBody TweetDTO tweetDTO) {
 
-<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        Long userId = UserIdentifierExtractor.extractUserId(headerUserId, paramUserId, tweetDTO != null ? tweetDTO.getUserId() : null);</span>
-<span class="fc" id="L41">        Optional&lt;UserDtoResponse&gt; userOpt = Optional.ofNullable(userService.getUserById(userId));</span>
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        Long userId = UserIdentifierExtractor.extractUserId(headerUserId, paramUserId, tweetDTO != null ? tweetDTO.getUserId() : null);</span>
+<span class="fc" id="L42">        Optional&lt;UserDtoResponse&gt; userOpt = Optional.ofNullable(userService.getUserById(userId));</span>
 
-<span class="fc bfc" id="L43" title="All 2 branches covered.">        if (userOpt.isPresent()) {</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (userOpt.isPresent()) {</span>
 
 
-<span class="fc" id="L46">            Tweet createdTweet = tweetService.postTweet(tweetDTO);</span>
+<span class="fc" id="L47">            Tweet createdTweet = tweetService.postTweet(tweetDTO);</span>
 
-<span class="fc" id="L48">            Tweet tweet = new Tweet();</span>
-<span class="fc" id="L49">            tweet.setContent(createdTweet.getContent());</span>
-<span class="fc" id="L50">            tweet.setUser(createdTweet.getUser());</span>
+<span class="fc" id="L49">            Tweet tweet = new Tweet();</span>
+<span class="fc" id="L50">            tweet.setContent(createdTweet.getContent());</span>
+<span class="fc" id="L51">            tweet.setUser(createdTweet.getUser());</span>
 
-<span class="fc" id="L52">            return ResponseEntity.ok(tweet);</span>
+<span class="fc" id="L53">            return ResponseEntity.ok(tweet);</span>
         }
-<span class="fc" id="L54">        return ResponseEntity.notFound().build();</span>
+<span class="fc" id="L55">        return ResponseEntity.notFound().build();</span>
     }
 
 
     @GetMapping(&quot;/timeline&quot;)
     public ResponseEntity&lt;List&lt;TweetDTO&gt;&gt; getTimeline(@RequestHeader(value = &quot;userId&quot;, required = false) Long headerUserId,
                                                       @RequestParam(value = &quot;userId&quot;, required = false) Long paramUserId) {
-<span class="fc" id="L61">        Long userId = UserIdentifierExtractor.extractUserId(headerUserId, paramUserId, null);</span>
-<span class="fc" id="L62">        Optional&lt;UserDtoResponse&gt; userOpt = Optional.ofNullable(userService.getUserById(userId));</span>
+<span class="fc" id="L62">        Long userId = UserIdentifierExtractor.extractUserId(headerUserId, paramUserId, null);</span>
+<span class="fc" id="L63">        Optional&lt;UserDtoResponse&gt; userOpt = Optional.ofNullable(userService.getUserById(userId));</span>
 
-<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (userOpt.isPresent()) {</span>
-<span class="fc" id="L65">            List&lt;Tweet&gt; timeline = tweetService.getTimeline(userOpt.get().getId());</span>
-<span class="fc" id="L66">            List&lt;TweetDTO&gt; timelineDTO = timeline.stream().map(tweet -&gt; {</span>
-<span class="fc" id="L67">                TweetDTO dto = new TweetDTO();</span>
-<span class="fc" id="L68">                dto.setUserId(tweet.getId());</span>
-<span class="fc" id="L69">                dto.setContent(tweet.getContent());</span>
-<span class="fc" id="L70">                dto.setCreatedAt(tweet.getCreatedAt());</span>
-<span class="fc" id="L71">                dto.setUserId(tweet.getUser().getId());</span>
-<span class="fc" id="L72">                return dto;</span>
-<span class="fc" id="L73">            }).collect(Collectors.toList());</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        if (userOpt.isPresent()) {</span>
+<span class="fc" id="L66">            List&lt;Tweet&gt; timeline = tweetService.getTimeline(userOpt.get().getId());</span>
+<span class="fc" id="L67">            List&lt;TweetDTO&gt; timelineDTO = timeline.stream().map(tweet -&gt; {</span>
+<span class="fc" id="L68">                TweetDTO dto = new TweetDTO();</span>
+<span class="fc" id="L69">                dto.setUserId(tweet.getId());</span>
+<span class="fc" id="L70">                dto.setContent(tweet.getContent());</span>
+<span class="fc" id="L71">                dto.setCreatedAt(tweet.getCreatedAt());</span>
+<span class="fc" id="L72">                dto.setUserId(tweet.getUser().getId());</span>
+<span class="fc" id="L73">                return dto;</span>
+<span class="fc" id="L74">            }).collect(Collectors.toList());</span>
 
-<span class="fc" id="L75">            return ResponseEntity.ok(timelineDTO);</span>
+<span class="fc" id="L76">            return ResponseEntity.ok(timelineDTO);</span>
         }
-<span class="fc" id="L77">        return ResponseEntity.notFound().build();</span>
+<span class="fc" id="L78">        return ResponseEntity.notFound().build();</span>
 
     }
 

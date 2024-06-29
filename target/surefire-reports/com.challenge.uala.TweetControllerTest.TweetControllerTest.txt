@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.challenge.uala.TweetControllerTest.TweetControllerTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.570 s -- in com.challenge.uala.TweetControllerTest.TweetControllerTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.563 s -- in com.challenge.uala.TweetControllerTest.TweetControllerTest
