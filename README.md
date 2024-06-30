@@ -50,9 +50,7 @@ Para explorar la documentación de la API en Swagger:
 https://ualachallenge-4d208bc380f1.herokuapp.com/swagger-ui/index.html#/
 
 ## Notas Adicionales
-Asegúrate de que tu aplicación esté correctamente configurada para manejar la base de datos en el entorno de producción de Heroku, ya que H2 Database es ideal para desarrollo pero no es adecuado para producción a largo plazo.
-Considera la posibilidad de añadir variables de entorno adicionales en Heroku para configuraciones sensibles como credenciales de bases de datos o claves de API.
 
 
-Este README ahora incluye un enlace directo a la documentación de Swagger en tu aplicación desplegada en Heroku. Asegúrate de ajustar cualquier otro detalle específico según las necesidades de tu proyecto antes de publicarlo.
+Este README ahora incluye un enlace directo a la documentación de Swagger en tu aplicación desplegada en Heroku. 
 
