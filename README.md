@@ -33,18 +33,20 @@ Esto compilará el proyecto y ejecutará la aplicación Spring Boot utilizando l
 
 
 
-###Despliegue en Heroku
+## Despliegue en Heroku
 La aplicación ya está desplegada en Heroku. Puedes acceder a ella utilizando la siguiente URL:
 
-Microblogging Platform en Heroku
+## Microblogging Platform en Heroku
 
-*https://ualachallenge-4d208bc380f1.herokuapp.com/
-Documentación API (Swagger)
+https://ualachallenge-4d208bc380f1.herokuapp.com/
+
+## Documentación API (Swagger)
 Para explorar la documentación de la API en Swagger:
 
-Swagger UI en Heroku
+## Swagger UI en Heroku
 https://ualachallenge-4d208bc380f1.herokuapp.com/swagger-ui/index.html#/
-Notas Adicionales
+
+## Notas Adicionales
 Asegúrate de que tu aplicación esté correctamente configurada para manejar la base de datos en el entorno de producción de Heroku, ya que H2 Database es ideal para desarrollo pero no es adecuado para producción a largo plazo.
 Considera la posibilidad de añadir variables de entorno adicionales en Heroku para configuraciones sensibles como credenciales de bases de datos o claves de API.
 
