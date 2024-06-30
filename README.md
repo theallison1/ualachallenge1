@@ -34,6 +34,32 @@ cd ualachallenge1
   
 ### Esto compilará el proyecto y ejecutará la aplicación Spring Boot utilizando la configuración local.
 
+## Ejecutar con Docker (Opcional)
+### Si prefieres ejecutar la aplicación utilizando Docker, asegúrate de tener Docker instalado en tu sistema y luego utiliza el siguiente Dockerfile:
+# Dockerfile
+
+# Utiliza una imagen de OpenJDK 17 como base
+FROM openjdk:17-jdk-alpine
+
+# Copia el JAR construido de tu aplicación al contenedor
+COPY target/uala-0.0.1-SNAPSHOT.jar /app/uala.jar
+
+# Expone el puerto 8080 en el contenedor
+EXPOSE 8080
+
+# Comando para ejecutar la aplicación al iniciar el contenedor
+CMD ["java", "-jar", "/app/uala.jar"]
+
+## Para construir la imagen Docker y ejecutar el contenedor:
+# Construir la imagen Docker
+docker build -t microblogging-app .
+
+# Ejecutar el contenedor Docker
+docker run -p 8080:8080 microblogging-app
+
+# La aplicación estará disponible en http://localhost:8080.
+
+
 
 
 ## Despliegue en Heroku
