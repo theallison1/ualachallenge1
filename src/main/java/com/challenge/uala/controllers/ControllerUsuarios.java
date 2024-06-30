@@ -46,7 +46,7 @@ public class ControllerUsuarios {
     }
 
     @PostMapping("/{username}/follow/{userToFollow}")
-    public ResponseEntity<Void> followUser(@PathVariable String username, @PathVariable String userToFollow) {
+    public ResponseEntity<?> followUser(@PathVariable String username, @PathVariable String userToFollow) {
         LOGGER.info("Attempting to follow: {} -> {}", username, userToFollow);
         LOGGER.info("-----------------------------------");
 
@@ -54,8 +54,10 @@ public class ControllerUsuarios {
         User followUser = userService.findByUsername(userToFollow);
 
         if (user == null || followUser == null) {
-            LOGGER.error("User not found: {} or {}", username, userToFollow);
-            return ResponseEntity.notFound().build();
+            LOGGER.error("Usuario no encontrado : {} or {}", username, userToFollow);
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("usuario no encontrado con nombre" +username);
+
         }
 
         userService.followUser(user, followUser);

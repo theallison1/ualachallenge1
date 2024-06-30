@@ -33,9 +33,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
+        try {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con nombre de usuario: " + username));
+
+    } catch (EntityNotFoundException e) {
+        LOGGER.error("Usuario no encontrado con id: {}", username, e);
+        return null; // Devolver null u otra respuesta indicativa de que el usuario no fue encontrado
+    } catch (DataAccessException e) {
+        LOGGER.error("Excepción de acceso a datos al buscar usuario con id: {}", username, e);
+        throw new RuntimeException("Error al acceder a datos al buscar usuario", e);
+    } catch (Exception e) {
+        LOGGER.error("Otra excepción al buscar usuario con id: {}", username, e);
+        throw new RuntimeException("Error inesperado al buscar usuario", e);
     }
+        }
 
     @Override
     @Transactional
