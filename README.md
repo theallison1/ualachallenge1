@@ -35,7 +35,8 @@ Despliegue en Heroku
 La aplicación ya está desplegada en Heroku. Puedes acceder a ella utilizando la siguiente URL:
 
 Microblogging Platform en Heroku
-https://ualachallenge-4d208bc380f1.herokuapp.com/
+
+*https://ualachallenge-4d208bc380f1.herokuapp.com/
 Documentación API (Swagger)
 Para explorar la documentación de la API en Swagger:
 
