@@ -21,7 +21,7 @@
 
     <!-- Propiedades del proyecto -->
     <properties>
-        <java.version>11</java.version> <!-- Cambia la versión de Java a 11 -->
+        <java.version>17</java.version> <!-- Cambia la versión de Java a 11 -->
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>

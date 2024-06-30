@@ -54,3 +54,5 @@ g
 7src/main/java/com/challenge/uala/mapper/UserMapper.java,d/d/dda242b5fd77618cb19130ca0ef6dbaf3f93fcc7
 8
 Procfile,b/c/bc3c68e880d1a01632bce79f69dd1387c7ba9c54
+A
+system.properties,a/5/a5db35984da8ffa0e255c16a2e31ae7b26e7d222
