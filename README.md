@@ -21,7 +21,7 @@ Una versión simplificada de una plataforma de microblogging similar a Twitter, 
 
 ### Clonar el Repositorio
 
-```bash
+
 git clone https://github.com/theallison1/ualachallenge1.git
 cd ualachallenge1
 
@@ -31,7 +31,9 @@ cd ualachallenge1
   mvn spring-boot:run
 Esto compilará el proyecto y ejecutará la aplicación Spring Boot utilizando la configuración local.
 
-Despliegue en Heroku
+
+
+###Despliegue en Heroku
 La aplicación ya está desplegada en Heroku. Puedes acceder a ella utilizando la siguiente URL:
 
 Microblogging Platform en Heroku
