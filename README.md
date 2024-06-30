@@ -32,7 +32,7 @@ cd ualachallenge1
   
   mvn spring-boot:run
   
-### Esto compilará el proyecto y ejecutará la aplicación Spring Boot utilizando la configuración local.
+ Esto compilará el proyecto y ejecutará la aplicación Spring Boot utilizando la configuración local.
 
 ## Ejecutar con Docker (Opcional)
  Si prefieres ejecutar la aplicación utilizando Docker, asegúrate de tener Docker instalado en tu sistema y luego utiliza el siguiente Dockerfile:
