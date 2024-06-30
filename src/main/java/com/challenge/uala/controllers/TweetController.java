@@ -10,6 +10,7 @@ import com.challenge.uala.services.UserService.UserService;
 import com.challenge.uala.util.UserIdentifierExtractor;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,7 +58,7 @@ public class TweetController {
 
 
     @GetMapping("/timeline")
-    public ResponseEntity<List<TweetDTO>> getTimeline(@RequestHeader(value = "userId", required = false) Long headerUserId,
+    public ResponseEntity<?> getTimeline(@RequestHeader(value = "userId", required = false) Long headerUserId,
                                                       @RequestParam(value = "userId", required = false) Long paramUserId) {
         Long userId = UserIdentifierExtractor.extractUserId(headerUserId, paramUserId, null);
         Optional<UserDtoResponse> userOpt = Optional.ofNullable(userService.getUserById(userId));
@@ -75,7 +76,7 @@ public class TweetController {
 
             return ResponseEntity.ok(timelineDTO);
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("tweets no encontrado con id "+ userId);
 
     }
 
