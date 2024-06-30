@@ -65,22 +65,23 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public UserDtoResponse getUserById(Long userId) {
-        try {
-            User user = userRepository.findById(userId)
-                    .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id: " + userId));
 
-            return mapUserToDtoResponse(user);
-        } catch (EntityNotFoundException e) {
-            // Loguear la excepción o manejarla según sea necesario
-            LOGGER.error("Usuario no encontrado con id: {}", userId, e);
-            throw e; // Re-lanzar la excepción para que sea manejada por el controlador o capa superior
-        } catch (DataAccessException e) {
-            LOGGER.error("Excepción de acceso a datos al buscar usuario con id: {}", userId, e);
-            throw new RuntimeException("Error al acceder a datos al buscar usuario", e); // Ejemplo de manejo adicional
-        } catch (Exception e) {
-            LOGGER.error("Otra excepción al buscar usuario con id: {}", userId, e);
-            throw new RuntimeException("Error inesperado al buscar usuario", e); // Manejo de excepciones generales
-        }
+            try {
+                User user = userRepository.findById(userId)
+                        .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id: " + userId));
+
+                return mapUserToDtoResponse(user);
+            } catch (EntityNotFoundException e) {
+                LOGGER.error("Usuario no encontrado con id: {}", userId, e);
+                return null; // Devolver null u otra respuesta indicativa de que el usuario no fue encontrado
+            } catch (DataAccessException e) {
+                LOGGER.error("Excepción de acceso a datos al buscar usuario con id: {}", userId, e);
+                throw new RuntimeException("Error al acceder a datos al buscar usuario", e);
+            } catch (Exception e) {
+                LOGGER.error("Otra excepción al buscar usuario con id: {}", userId, e);
+                throw new RuntimeException("Error inesperado al buscar usuario", e);
+            }
+
     }
 
 

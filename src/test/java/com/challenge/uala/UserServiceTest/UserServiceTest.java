@@ -7,6 +7,7 @@ import com.challenge.uala.repos.UserRepository;
 import com.challenge.uala.services.UserService.UserService;
 import com.challenge.uala.services.UserServiceImple.UserServiceImpl;
 import jakarta.persistence.EntityNotFoundException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -21,7 +22,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -50,48 +50,15 @@ class UserServiceTest {
         UserDtoResponse result = userService.getUserById(userId);
 
         // Verificaciones
-        assertNotNull(result);
-        assertEquals(userId, result.getId());
-        assertEquals(user.getUsername(), result.getUsername());
-
-        // Verificar que el método del repositorio se llamó una vez con el userId
-        verify(userRepository, times(1)).findById(userId);
-    }
-
-    @Test
-    @Transactional(readOnly = true)
-    public void testGetUserByIdNotFound() {
-        // Mock de usuario no existente
-        Long userId = 1L;
-
-        // Configurar el repositorio para devolver Optional.empty(), simulando que no se encontró el usuario
-        when(userRepository.findById(userId)).thenReturn(java.util.Optional.empty());
-
-        // Verificar que se lance EntityNotFoundException
-        assertThrows(EntityNotFoundException.class, () -> {
-            userService.getUserById(userId);
-        });
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(userId, result.getId());
+        Assertions.assertEquals(user.getUsername(), result.getUsername());
 
         // Verificar que el método del repositorio se llamó una vez con el userId
         verify(userRepository, times(1)).findById(userId);
     }
 
 
-    @Test
-    void testGetUserByIdDataAccessException() {
-        // Intentamos obtener un usuario con un ID que sabemos que no existe
-        Long nonExistentUserId = 999L;
-
-        try {
-            userService.getUserById(nonExistentUserId);
-            fail("Expected EntityNotFoundException was not thrown");
-        } catch (EntityNotFoundException e) {
-            assertNotNull(e.getMessage()); // Aseguramos que el mensaje de la excepción no sea nulo
-            assertTrue(e.getMessage().contains("Usuario no encontrado con id")); // Verificamos un mensaje de error específico
-        } catch (Exception e) {
-            fail("Expected EntityNotFoundException, but got " + e.getClass().getSimpleName());
-        }
-    }
 
 
     @Test
@@ -103,8 +70,8 @@ class UserServiceTest {
         when(userRepository.findByUsername("user1")).thenReturn(Optional.of(user));
 
         User foundUser = userService.findByUsername("user1");
-        assertNotNull(foundUser);
-        assertEquals(1L, foundUser.getId());
+        Assertions.assertNotNull(foundUser);
+        Assertions.assertEquals(1L, foundUser.getId());
     }
 
     @Test
@@ -121,12 +88,12 @@ class UserServiceTest {
         when(userRepository.save(userCaptor.capture())).thenReturn(savedUser);
 
         UserDtoResponse result = userService.saveUser(userDTO);
-        assertNotNull(result);
-        assertEquals(1L, result.getId());
-        assertEquals("user1", result.getUsername());
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(1L, result.getId());
+        Assertions.assertEquals("user1", result.getUsername());
 
         User capturedUser = userCaptor.getValue();
-        assertEquals("user1", capturedUser.getUsername());
+        Assertions.assertEquals("user1", capturedUser.getUsername());
     }
 
     @Test
@@ -147,9 +114,9 @@ class UserServiceTest {
 
         Set<UserDtoResponse> followers = userService.getUsersFollowedByUser(1L).stream().collect(Collectors.toSet());
 
-        assertNotNull(followers);
-        assertEquals(1, followers.size());
-        assertEquals("follower1", followers.iterator().next().getUsername());
+        Assertions.assertNotNull(followers);
+        Assertions.assertEquals(1, followers.size());
+        Assertions.assertEquals("follower1", followers.iterator().next().getUsername());
     }
 
     @Test

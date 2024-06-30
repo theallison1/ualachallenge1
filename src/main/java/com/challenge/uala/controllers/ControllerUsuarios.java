@@ -8,7 +8,9 @@ import com.challenge.uala.services.UserService.UserService;
 import jakarta.validation.Valid;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 
@@ -28,10 +30,10 @@ public class ControllerUsuarios {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDtoResponse> getUserById(@PathVariable Long id) {
+    public ResponseEntity<?> getUserById(@PathVariable Long id) {
         UserDtoResponse user = userService.getUserById(id);
         if (user == null) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("usuario no encontrado con id" + id);
         }
         return ResponseEntity.ok(user);
     }
