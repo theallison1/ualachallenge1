@@ -1,0 +1,123 @@
+# Byte-compiled / optimized / DLL files
+*.class
+*.war
+*.ear
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+
+# Excluding specific target files
+target/jacoco.exec
+target/maven-archiver/pom.properties
+target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
+target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+target/site/jacoco/com.challenge.uala.mapper/UserMapper.html
+target/site/jacoco/com.challenge.uala.mapper/UserMapper.java.html
+target/site/jacoco/com.challenge.uala.mapper/index.html
+target/site/jacoco/com.challenge.uala.mapper/index.source.html
+
+# Spring Boot
+spring.log
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# SonarLint
+.idea/sonarlint/
+
+# IntelliJ IDEA
+
+*.iws
+*.iml
+*.ipr
+
+# VS Code
+.vscode/
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# Windows
+*.bat
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Packages
+*.jar
+*.war
+*.ear
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Test output
+test-output/
+
+# Coverage
+.coverage
+coverage/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+*.sublime-project
+*.sublime-workspace
+
+# Logs and databases
+*.log
+*.db
+*.mv.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# Backup files
+*.bak
+
+# Generated files
+*.generated
+
+# Node.js
+node_modules/
+
+# Swagger
+swagger-ui/
+swagger.json
+
+# H2 Database
+*.h2.db
+*.trace.db
+
+# Heroku
+.heroku/
+
+# Miscellaneous
+*.log
+*.out
+*.tmp
+*.temp
+*.old
+*.backup
+*.bak
+
+# Exclude the build directory
+build/
